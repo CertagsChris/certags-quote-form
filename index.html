@@ -279,12 +279,12 @@
         
         <div class="form-content">
             <form id="quoteForm" action="https://formsubmit.co/d0e976ab656743bb7a46ac7208fec145" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="_subject" value="New Quote Request from Certags Form">
+                <input type="hidden" name="_subject" id="email_subject" value="New Quote Request from Certags Form">
+                <input type="hidden" name="_replyto" id="reply_to_email">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="text" name="_honey" style="display:none">
                 <input type="hidden" name="_template" value="box">
                 <input type="hidden" name="QUOTE_SUMMARY" id="formatted_quote">
-                <input type="hidden" name="total_items" id="total_items" value="1">
                 
                 <div class="form-section">
                     <h2>Request Information</h2>
@@ -732,12 +732,12 @@
                             }
                             
                             // Make next item fields required
-                            document.getElementById(`item${itemNum + 1}_product_type`).required = true;
-                            document.getElementById(`item${itemNum + 1}_quantity`).required = true;
-                            document.getElementById(`item${itemNum + 1}_size`).required = true;
-                            
-                            // Update total items count
-                            document.getElementById('total_items').value = itemNum + 1;
+                            const nextProductType = document.getElementById(`item${itemNum + 1}_product_type`);
+                            const nextQuantity = document.getElementById(`item${itemNum + 1}_quantity`);
+                            const nextSize = document.getElementById(`item${itemNum + 1}_size`);
+                            if (nextProductType) nextProductType.required = true;
+                            if (nextQuantity) nextQuantity.required = true;
+                            if (nextSize) nextSize.required = true;
                             
                             setTimeout(() => {
                                 nextContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -749,12 +749,51 @@
                             }
                             
                             // Remove required from next item fields
-                            document.getElementById(`item${itemNum + 1}_product_type`).required = false;
-                            document.getElementById(`item${itemNum + 1}_quantity`).required = false;
-                            document.getElementById(`item${itemNum + 1}_size`).required = false;
+                            const nextProductType = document.getElementById(`item${itemNum + 1}_product_type`);
+                            const nextQuantity = document.getElementById(`item${itemNum + 1}_quantity`);
+                            const nextSize = document.getElementById(`item${itemNum + 1}_size`);
+                            if (nextProductType) nextProductType.required = false;
+                            if (nextQuantity) nextQuantity.required = false;
+                            if (nextSize) nextSize.required = false;
                             
-                            // Update total items count
-                            document.getElementById('total_items').value = itemNum;
+                            // Clear all form data for next item and subsequent items
+                            for (let j = itemNum + 1; j <= 5; j++) {
+                                const itemContainer = document.getElementById(`item${j}_container`);
+                                if (itemContainer) {
+                                    // Clear all inputs, selects, and textareas in this container
+                                    const inputs = itemContainer.querySelectorAll('input[type="text"], input[type="file"], textarea, select');
+                                    inputs.forEach(input => {
+                                        if (input.type === 'file') {
+                                            input.value = '';
+                                        } else if (input.tagName === 'SELECT') {
+                                            input.selectedIndex = 0;
+                                        } else {
+                                            input.value = '';
+                                        }
+                                    });
+                                    
+                                    // Clear all checkboxes
+                                    const checkboxes = itemContainer.querySelectorAll('input[type="checkbox"]');
+                                    checkboxes.forEach(cb => {
+                                        cb.checked = false;
+                                    });
+                                    
+                                    // Hide file upload confirmation
+                                    const fileNameDisplay = document.getElementById(`fileName${j}`);
+                                    if (fileNameDisplay) {
+                                        fileNameDisplay.textContent = '';
+                                        fileNameDisplay.classList.remove('active');
+                                    }
+                                    
+                                    // Hide all product specs
+                                    const metalSpecs = document.getElementById(`item${j}_metal_specs`);
+                                    const magnetSpecs = document.getElementById(`item${j}_magnet_specs`);
+                                    const labelSpecs = document.getElementById(`item${j}_label_specs`);
+                                    if (metalSpecs) metalSpecs.classList.remove('active');
+                                    if (magnetSpecs) magnetSpecs.classList.remove('active');
+                                    if (labelSpecs) labelSpecs.classList.remove('active');
+                                }
+                            }
                             
                             // Uncheck and hide all subsequent items
                             for (let j = itemNum + 1; j <= 5; j++) {
@@ -779,6 +818,57 @@
         // Form submission
         document.getElementById('quoteForm').addEventListener('submit', function(e) {
             const formData = new FormData(this);
+            
+            // Map sales reps to their email addresses
+            const repEmails = {
+                'Roman': 'roman@certags.com',
+                'Zack': 'zack@certags.com',
+                'Andrew': 'andrew@certags.com',
+                'Jake': 'jake@certags.com',
+                'Jose': 'jose@certags.com',
+                'Tanner': 'tanner@certags.com'
+            };
+            
+            const salesRep = formData.get('sales_rep');
+            const customerCompany = formData.get('customer_company');
+            
+            // Set reply-to email
+            if (repEmails[salesRep]) {
+                document.getElementById('reply_to_email').value = repEmails[salesRep];
+            }
+            
+            // Set dynamic subject line with product type(s)
+            
+            // Collect all product types
+            let productTypes = [];
+            for (let i = 1; i <= 5; i++) {
+                const container = document.getElementById(`item${i}_container`);
+                if (container && container.classList.contains('active')) {
+                    const productType = formData.get(`item${i}_product_type`);
+                    if (productType && productType !== 'Other') {
+                        if (!productTypes.includes(productType)) {
+                            productTypes.push(productType);
+                        }
+                    } else if (productType === 'Other') {
+                        const otherType = formData.get(`item${i}_product_type_other`);
+                        if (otherType && !productTypes.includes(otherType)) {
+                            productTypes.push(otherType);
+                        }
+                    }
+                }
+            }
+            
+            // Format product types for subject
+            let productTypeText = 'Multiple Products';
+            if (productTypes.length === 1) {
+                productTypeText = productTypes[0];
+            } else if (productTypes.length === 2) {
+                productTypeText = productTypes.join(' & ');
+            } else if (productTypes.length > 2) {
+                productTypeText = 'Multiple Products';
+            }
+            
+            document.getElementById('email_subject').value = `${salesRep} Quote for ${customerCompany} - ${productTypeText}`;
             
             const getCheckboxValues = (name) => {
                 const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
@@ -811,14 +901,24 @@
             formatted += 'Sales Rep: ' + formData.get('sales_rep') + '\n';
             formatted += 'Customer: ' + formData.get('customer_company') + '\n\n';
             
+            // Count active items by checking which containers are visible
+            let itemCount = 1;
+            for (let i = 2; i <= 5; i++) {
+                const container = document.getElementById(`item${i}_container`);
+                if (container && container.classList.contains('active')) {
+                    itemCount = i;
+                }
+            }
+            
             // Loop through all active items
-            const totalItems = parseInt(document.getElementById('total_items').value);
-            for (let i = 1; i <= totalItems; i++) {
-                formatted += `--- ITEM ${i} ---\n`;
+            for (let i = 1; i <= itemCount; i++) {
                 const itemType = formData.get(`item${i}_product_type`);
+                if (!itemType) continue; // Skip if product type not selected
+                
+                formatted += `--- ITEM ${i} ---\n`;
                 formatted += 'Product Type: ' + (itemType === 'Other' ? formData.get(`item${i}_product_type_other`) : itemType) + '\n';
-                formatted += 'Quantity: ' + formData.get(`item${i}_quantity`) + '\n';
-                formatted += 'Size: ' + formData.get(`item${i}_size`) + '\n';
+                formatted += 'Quantity: ' + (formData.get(`item${i}_quantity`) || '') + '\n';
+                formatted += 'Size: ' + (formData.get(`item${i}_size`) || '') + '\n';
                 
                 if (itemType === 'Metal Tags') {
                     formatted += 'Material: ' + getCheckboxValues(`item${i}_material`) + '\n';
@@ -845,7 +945,7 @@
                     formatted += 'Other Comments: ' + itemOther + '\n';
                 }
                 
-                if (i < totalItems) formatted += '\n';
+                if (i < itemCount) formatted += '\n';
             }
             
             document.getElementById('formatted_quote').value = formatted;
