@@ -661,7 +661,7 @@
                         <div class="form-group">
                             <label>Upload Design File(s)</label>
                             <div class="file-upload">
-                                <input type="file" id="designFile${itemNum}" name="design_file_${itemNum}" accept=".pdf,.ai,.eps,.jpg,.jpeg,.png,.svg" multiple>
+                                <input type="file" id="designFile${itemNum}" name="design_file_${itemNum}[]" accept=".pdf,.ai,.eps,.jpg,.jpeg,.png,.svg" multiple>
                                 <label for="designFile${itemNum}" class="file-upload-label">
                                     📎 Click to upload design files (PDF, AI, EPS, JPG, PNG, SVG) - Multiple files allowed
                                 </label>
@@ -1118,6 +1118,27 @@
                     formatted += 'Laminated: ' + (formData.get(`item${i}_laminated_label`) || 'Yes') + '\n';
                     formatted += 'Print: ' + getDropdownValue(`item${i}_print_label`) + '\n';
                     formatted += 'Variable Data: ' + (formData.get(`item${i}_variable_data_label`) || '') + '\n';
+                } else if (itemType === 'Other') {
+                    // Include all "Other" product fields that have values
+                    const otherFields = [
+                        { key: `item${i}_material_other_product`, label: 'Material' },
+                        { key: `item${i}_thickness_other_product`, label: 'Thickness' },
+                        { key: `item${i}_sides_other_product`, label: 'Sides' },
+                        { key: `item${i}_print_colors_other_product`, label: 'Print Colors' },
+                        { key: `item${i}_print_method_other_product`, label: 'Print Method' },
+                        { key: `item${i}_laminate_other_product`, label: 'Laminate' },
+                        { key: `item${i}_adhesive_other_product`, label: 'Adhesive' },
+                        { key: `item${i}_hole_other_product`, label: 'Hole' },
+                        { key: `item${i}_variable_data_other_product`, label: 'Variable Data' },
+                        { key: `item${i}_other_field_other_product`, label: 'Other' }
+                    ];
+                    
+                    otherFields.forEach(field => {
+                        const value = formData.get(field.key);
+                        if (value && value.trim()) {
+                            formatted += field.label + ': ' + value.trim() + '\n';
+                        }
+                    });
                 }
                 
                 const itemOther = formData.get(`item${i}_other_info`);
