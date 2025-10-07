@@ -942,6 +942,45 @@
         
         // Form submission
         document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            // First, disable all form fields in inactive item containers
+            for (let i = 1; i <= 5; i++) {
+                const container = document.getElementById(`item${i}_container`);
+                if (!container || !container.classList.contains('active')) {
+                    // Disable all inputs, selects, textareas, and file inputs in this container
+                    const fields = container.querySelectorAll('input, select, textarea');
+                    fields.forEach(field => {
+                        field.disabled = true;
+                    });
+                } else {
+                    // For active items, disable fields in inactive product spec sections
+                    const productTypeSelect = document.getElementById(`item${i}_product_type`);
+                    const selectedType = productTypeSelect ? productTypeSelect.value : '';
+                    
+                    const metalSpecs = document.getElementById(`item${i}_metal_specs`);
+                    const magnetSpecs = document.getElementById(`item${i}_magnet_specs`);
+                    const labelSpecs = document.getElementById(`item${i}_label_specs`);
+                    const otherSpecs = document.getElementById(`item${i}_other_specs`);
+                    
+                    // Disable fields in non-selected product type sections
+                    if (selectedType !== 'Metal Tags' && metalSpecs) {
+                        const fields = metalSpecs.querySelectorAll('input, select, textarea');
+                        fields.forEach(field => field.disabled = true);
+                    }
+                    if (selectedType !== 'Magnets' && magnetSpecs) {
+                        const fields = magnetSpecs.querySelectorAll('input, select, textarea');
+                        fields.forEach(field => field.disabled = true);
+                    }
+                    if (selectedType !== 'Custom Labels' && labelSpecs) {
+                        const fields = labelSpecs.querySelectorAll('input, select, textarea');
+                        fields.forEach(field => field.disabled = true);
+                    }
+                    if (selectedType !== 'Other' && otherSpecs) {
+                        const fields = otherSpecs.querySelectorAll('input, select, textarea');
+                        fields.forEach(field => field.disabled = true);
+                    }
+                }
+            }
+            
             const formData = new FormData(this);
             
             // Map sales reps to their email addresses
