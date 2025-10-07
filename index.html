@@ -234,6 +234,14 @@
             display: none;
         }
         
+        .product-specs {
+            display: none;
+        }
+        
+        .product-specs.active {
+            display: block;
+        }
+        
         @media (max-width: 768px) {
             .form-row {
                 grid-template-columns: 1fr;
@@ -303,7 +311,7 @@
                                 <option value="Custom Labels">Custom Labels</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <input type="text" name="item1_product_type_other" id="item1_product_type_other" placeholder="Please specify product type" style="display:none; margin-top:10px;">
+                            <textarea name="item1_product_type_other" id="item1_product_type_other" placeholder="Please describe the product" style="display:none; margin-top:10px; min-height: 80px;"></textarea>
                         </div>
                         <div class="form-group"></div>
                     </div>
@@ -326,130 +334,223 @@
                     </div>
                 </div>
                 
-                <div class="form-section">
-                    <h2>Product Specifications</h2>
-                    
-                    <div class="form-group">
-                        <label>Material <span class="required">*</span> <span class="quantity-hint">(select all that apply)</span></label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-option">
-                                <input type="checkbox" name="item1_material" value="Aluminum" id="item1_mat_aluminum">
-                                <label for="item1_mat_aluminum">Aluminum</label>
-                            </div>
-                            <div class="checkbox-option">
-                                <input type="checkbox" name="item1_material" value="Stainless Steel" id="item1_mat_stainless">
-                                <label for="item1_mat_stainless">Stainless Steel</label>
-                            </div>
-                            <div class="checkbox-option">
-                                <input type="checkbox" name="item1_material" value="Other" id="item1_mat_other">
-                                <label for="item1_mat_other">Other</label>
-                            </div>
-                            <input type="text" name="item1_material_other" id="item1_material_other" placeholder="Please specify other material" class="checkbox-other-input">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Thickness <span class="required">*</span> <span class="quantity-hint">(select all that apply)</span></label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-option">
-                                <input type="checkbox" name="item1_thickness" value="0.5mm" id="item1_thick_05">
-                                <label for="item1_thick_05">0.5 mm</label>
-                            </div>
-                            <div class="checkbox-option">
-                                <input type="checkbox" name="item1_thickness" value="1mm" id="item1_thick_1">
-                                <label for="item1_thick_1">1 mm</label>
-                            </div>
-                            <div class="checkbox-option">
-                                <input type="checkbox" name="item1_thickness" value="Other" id="item1_thick_other">
-                                <label for="item1_thick_other">Other</label>
-                            </div>
-                            <input type="text" name="item1_thickness_other" id="item1_thickness_other" placeholder="Please specify other thickness" class="checkbox-other-input">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
+                <!-- METAL TAGS SPECS -->
+                <div id="item1_metal_specs" class="product-specs">
+                    <div class="form-section">
+                        <h2>Metal Tag Specifications</h2>
+                        
                         <div class="form-group">
-                            <label>Print <span class="required">*</span></label>
-                            <select name="item1_print" id="item1_print" required>
-                                <option value="">Select Print Option</option>
-                                <option value="One Side">One Side</option>
-                                <option value="Two Side">Two Side</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            <input type="text" name="item1_print_other" id="item1_print_other" placeholder="Please specify print option" style="display:none; margin-top:10px;">
-                        </div>
-                        <div class="form-group"></div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Print Method <span class="required">*</span> <span class="quantity-hint">(select all that apply)</span></label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-option">
-                                <input type="checkbox" name="item1_print_method" value="Digital" id="item1_pm_digital">
-                                <label for="item1_pm_digital">Digital</label>
+                            <label>Material <span class="quantity-hint">(select all that apply)</span></label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="item1_material" value="Aluminum" id="item1_mat_aluminum">
+                                    <label for="item1_mat_aluminum">Aluminum</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="item1_material" value="Stainless Steel" id="item1_mat_stainless">
+                                    <label for="item1_mat_stainless">Stainless Steel</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="item1_material" value="Other" id="item1_mat_other">
+                                    <label for="item1_mat_other">Other</label>
+                                </div>
+                                <input type="text" name="item1_material_other" id="item1_material_other" placeholder="Please specify other material" class="checkbox-other-input">
                             </div>
-                            <div class="checkbox-option">
-                                <input type="checkbox" name="item1_print_method" value="Etch and Fill" id="item1_pm_etchfill">
-                                <label for="item1_pm_etchfill">Etch and Fill</label>
-                            </div>
-                            <div class="checkbox-option">
-                                <input type="checkbox" name="item1_print_method" value="Etch, No Fill" id="item1_pm_etchno">
-                                <label for="item1_pm_etchno">Etch, No Fill</label>
-                            </div>
-                            <div class="checkbox-option">
-                                <input type="checkbox" name="item1_print_method" value="Other" id="item1_pm_other">
-                                <label for="item1_pm_other">Other</label>
-                            </div>
-                            <input type="text" name="item1_print_method_other" id="item1_print_method_other" placeholder="Please specify other print method" class="checkbox-other-input">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Print Color <span class="required">*</span></label>
-                            <select name="item1_print_color" id="item1_print_color" required>
-                                <option value="">Select Print Color</option>
-                                <option value="Black">Black</option>
-                                <option value="Multiple Colors">Multiple Colors</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            <input type="text" name="item1_print_color_other" id="item1_print_color_other" placeholder="Please specify print color" style="display:none; margin-top:10px;">
                         </div>
                         
                         <div class="form-group">
-                            <label>Hole <span class="required">*</span></label>
-                            <select name="item1_hole" id="item1_hole" required>
-                                <option value="">Select Hole Option</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                                <option value="Multiple">Multiple</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            <input type="text" name="item1_hole_other" id="item1_hole_other" placeholder="Please specify hole option" style="display:none; margin-top:10px;">
+                            <label>Thickness <span class="quantity-hint">(select all that apply)</span></label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="item1_thickness" value="0.5mm" id="item1_thick_05">
+                                    <label for="item1_thick_05">0.5 mm</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="item1_thickness" value="1mm" id="item1_thick_1">
+                                    <label for="item1_thick_1">1 mm</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="item1_thickness" value="Other" id="item1_thick_other">
+                                    <label for="item1_thick_other">Other</label>
+                                </div>
+                                <input type="text" name="item1_thickness_other" id="item1_thickness_other" placeholder="Please specify other thickness" class="checkbox-other-input">
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Adhesive <span class="required">*</span></label>
-                            <select name="item1_adhesive" id="item1_adhesive" required>
-                                <option value="">Select Adhesive Option</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            <input type="text" name="item1_adhesive_other" id="item1_adhesive_other" placeholder="Please specify adhesive option" style="display:none; margin-top:10px;">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Print</label>
+                                <select name="item1_print" id="item1_print">
+                                    <option value="">Select Print Option</option>
+                                    <option value="One Side">One Side</option>
+                                    <option value="Two Side">Two Side</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item1_print_other" id="item1_print_other" placeholder="Please specify print option" style="display:none; margin-top:10px;">
+                            </div>
+                            <div class="form-group"></div>
                         </div>
                         
                         <div class="form-group">
-                            <label>Variable Data <span class="required">*</span></label>
-                            <select name="item1_variable_data" id="item1_variable_data" required>
-                                <option value="">Select Variable Data Option</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            <input type="text" name="item1_variable_data_other" id="item1_variable_data_other" placeholder="Please specify variable data option" style="display:none; margin-top:10px;">
+                            <label>Print Method <span class="quantity-hint">(select all that apply)</span></label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="item1_print_method" value="Digital" id="item1_pm_digital">
+                                    <label for="item1_pm_digital">Digital</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="item1_print_method" value="Etch and Fill" id="item1_pm_etchfill">
+                                    <label for="item1_pm_etchfill">Etch and Fill</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="item1_print_method" value="Etch, No Fill" id="item1_pm_etchno">
+                                    <label for="item1_pm_etchno">Etch, No Fill</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="item1_print_method" value="Other" id="item1_pm_other">
+                                    <label for="item1_pm_other">Other</label>
+                                </div>
+                                <input type="text" name="item1_print_method_other" id="item1_print_method_other" placeholder="Please specify other print method" class="checkbox-other-input">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Print Color</label>
+                                <select name="item1_print_color" id="item1_print_color">
+                                    <option value="">Select Print Color</option>
+                                    <option value="Black">Black</option>
+                                    <option value="Multiple Colors">Multiple Colors</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item1_print_color_other" id="item1_print_color_other" placeholder="Please specify print color" style="display:none; margin-top:10px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Hole</label>
+                                <select name="item1_hole" id="item1_hole">
+                                    <option value="">Select Hole Option</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Multiple">Multiple</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item1_hole_other" id="item1_hole_other" placeholder="Please specify hole option" style="display:none; margin-top:10px;">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Adhesive</label>
+                                <select name="item1_adhesive" id="item1_adhesive">
+                                    <option value="">Select Adhesive Option</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item1_adhesive_other" id="item1_adhesive_other" placeholder="Please specify adhesive option" style="display:none; margin-top:10px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Variable Data</label>
+                                <select name="item1_variable_data_metal" id="item1_variable_data_metal">
+                                    <option value="">Select Option</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item1_variable_data_metal_other" id="item1_variable_data_metal_other" placeholder="Please specify" style="display:none; margin-top:10px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MAGNETS SPECS -->
+                <div id="item1_magnet_specs" class="product-specs">
+                    <div class="form-section">
+                        <h2>Magnet Specifications</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Laminated</label>
+                                <select name="item1_laminated_magnet">
+                                    <option value="Yes" selected>Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Print</label>
+                                <select name="item1_print_magnet" id="item1_print_magnet">
+                                    <option value="">Select Print Option</option>
+                                    <option value="Single Color">Single Color</option>
+                                    <option value="Multi Color">Multi Color</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item1_print_magnet_other" id="item1_print_magnet_other" placeholder="Please specify" style="display:none; margin-top:10px;">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Variable Data</label>
+                                <select name="item1_variable_data_magnet">
+                                    <option value="">Select Option</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                            <div class="form-group"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- LABELS SPECS -->
+                <div id="item1_label_specs" class="product-specs">
+                    <div class="form-section">
+                        <h2>Custom Label Specifications</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Material</label>
+                                <select name="item1_material_label" id="item1_material_label">
+                                    <option value="">Select Material</option>
+                                    <option value="Poly">Poly</option>
+                                    <option value="Vinyl">Vinyl</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item1_material_label_other" id="item1_material_label_other" placeholder="Please specify material" style="display:none; margin-top:10px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Laminated</label>
+                                <select name="item1_laminated_label">
+                                    <option value="Yes" selected>Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Print</label>
+                                <select name="item1_print_label" id="item1_print_label">
+                                    <option value="">Select Print Option</option>
+                                    <option value="Single Color">Single Color</option>
+                                    <option value="Multi Color">Multi Color</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item1_print_label_other" id="item1_print_label_other" placeholder="Please specify" style="display:none; margin-top:10px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Variable Data</label>
+                                <select name="item1_variable_data_label">
+                                    <option value="">Select Option</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -471,7 +572,7 @@
                 <div class="form-section">
                     <h2>Additional Information</h2>
                     <div class="form-group">
-                        <label>Other / Special Requests</label>
+                        <label>Other Comments / Special Requests</label>
                         <textarea name="item1_other_info" placeholder="Enter any additional information or special requests here..."></textarea>
                     </div>
                 </div>
@@ -487,7 +588,7 @@
                     </div>
                 </div>
                 
-                <!-- ITEM 2 (HIDDEN BY DEFAULT) -->
+                <!-- ITEM 2 (Copy of Item 1 structure) -->
                 <div id="item2Container">
                     <div class="item-header">ITEM 2</div>
                     
@@ -503,7 +604,7 @@
                                     <option value="Custom Labels">Custom Labels</option>
                                     <option value="Other">Other</option>
                                 </select>
-                                <input type="text" name="item2_product_type_other" id="item2_product_type_other" placeholder="Please specify product type" style="display:none; margin-top:10px;">
+                                <textarea name="item2_product_type_other" id="item2_product_type_other" placeholder="Please describe the product" style="display:none; margin-top:10px; min-height: 80px;"></textarea>
                             </div>
                             <div class="form-group"></div>
                         </div>
@@ -526,130 +627,223 @@
                         </div>
                     </div>
                     
-                    <div class="form-section">
-                        <h2>Product Specifications</h2>
-                        
-                        <div class="form-group">
-                            <label>Material <span class="required">*</span> <span class="quantity-hint">(select all that apply)</span></label>
-                            <div class="checkbox-group">
-                                <div class="checkbox-option">
-                                    <input type="checkbox" name="item2_material" value="Aluminum" id="item2_mat_aluminum">
-                                    <label for="item2_mat_aluminum">Aluminum</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" name="item2_material" value="Stainless Steel" id="item2_mat_stainless">
-                                    <label for="item2_mat_stainless">Stainless Steel</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" name="item2_material" value="Other" id="item2_mat_other">
-                                    <label for="item2_mat_other">Other</label>
-                                </div>
-                                <input type="text" name="item2_material_other" id="item2_material_other" placeholder="Please specify other material" class="checkbox-other-input">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Thickness <span class="required">*</span> <span class="quantity-hint">(select all that apply)</span></label>
-                            <div class="checkbox-group">
-                                <div class="checkbox-option">
-                                    <input type="checkbox" name="item2_thickness" value="0.5mm" id="item2_thick_05">
-                                    <label for="item2_thick_05">0.5 mm</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" name="item2_thickness" value="1mm" id="item2_thick_1">
-                                    <label for="item2_thick_1">1 mm</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" name="item2_thickness" value="Other" id="item2_thick_other">
-                                    <label for="item2_thick_other">Other</label>
-                                </div>
-                                <input type="text" name="item2_thickness_other" id="item2_thickness_other" placeholder="Please specify other thickness" class="checkbox-other-input">
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
+                    <!-- METAL TAGS SPECS - ITEM 2 -->
+                    <div id="item2_metal_specs" class="product-specs">
+                        <div class="form-section">
+                            <h2>Metal Tag Specifications</h2>
+                            
                             <div class="form-group">
-                                <label>Print <span class="required">*</span></label>
-                                <select name="item2_print" id="item2_print">
-                                    <option value="">Select Print Option</option>
-                                    <option value="One Side">One Side</option>
-                                    <option value="Two Side">Two Side</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                                <input type="text" name="item2_print_other" id="item2_print_other" placeholder="Please specify print option" style="display:none; margin-top:10px;">
-                            </div>
-                            <div class="form-group"></div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Print Method <span class="required">*</span> <span class="quantity-hint">(select all that apply)</span></label>
-                            <div class="checkbox-group">
-                                <div class="checkbox-option">
-                                    <input type="checkbox" name="item2_print_method" value="Digital" id="item2_pm_digital">
-                                    <label for="item2_pm_digital">Digital</label>
+                                <label>Material <span class="quantity-hint">(select all that apply)</span></label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" name="item2_material" value="Aluminum" id="item2_mat_aluminum">
+                                        <label for="item2_mat_aluminum">Aluminum</label>
+                                    </div>
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" name="item2_material" value="Stainless Steel" id="item2_mat_stainless">
+                                        <label for="item2_mat_stainless">Stainless Steel</label>
+                                    </div>
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" name="item2_material" value="Other" id="item2_mat_other">
+                                        <label for="item2_mat_other">Other</label>
+                                    </div>
+                                    <input type="text" name="item2_material_other" id="item2_material_other" placeholder="Please specify other material" class="checkbox-other-input">
                                 </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" name="item2_print_method" value="Etch and Fill" id="item2_pm_etchfill">
-                                    <label for="item2_pm_etchfill">Etch and Fill</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" name="item2_print_method" value="Etch, No Fill" id="item2_pm_etchno">
-                                    <label for="item2_pm_etchno">Etch, No Fill</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" name="item2_print_method" value="Other" id="item2_pm_other">
-                                    <label for="item2_pm_other">Other</label>
-                                </div>
-                                <input type="text" name="item2_print_method_other" id="item2_print_method_other" placeholder="Please specify other print method" class="checkbox-other-input">
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Print Color <span class="required">*</span></label>
-                                <select name="item2_print_color" id="item2_print_color">
-                                    <option value="">Select Print Color</option>
-                                    <option value="Black">Black</option>
-                                    <option value="Multiple Colors">Multiple Colors</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                                <input type="text" name="item2_print_color_other" id="item2_print_color_other" placeholder="Please specify print color" style="display:none; margin-top:10px;">
                             </div>
                             
                             <div class="form-group">
-                                <label>Hole <span class="required">*</span></label>
-                                <select name="item2_hole" id="item2_hole">
-                                    <option value="">Select Hole Option</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                    <option value="Multiple">Multiple</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                                <input type="text" name="item2_hole_other" id="item2_hole_other" placeholder="Please specify hole option" style="display:none; margin-top:10px;">
+                                <label>Thickness <span class="quantity-hint">(select all that apply)</span></label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" name="item2_thickness" value="0.5mm" id="item2_thick_05">
+                                        <label for="item2_thick_05">0.5 mm</label>
+                                    </div>
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" name="item2_thickness" value="1mm" id="item2_thick_1">
+                                        <label for="item2_thick_1">1 mm</label>
+                                    </div>
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" name="item2_thickness" value="Other" id="item2_thick_other">
+                                        <label for="item2_thick_other">Other</label>
+                                    </div>
+                                    <input type="text" name="item2_thickness_other" id="item2_thickness_other" placeholder="Please specify other thickness" class="checkbox-other-input">
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Adhesive <span class="required">*</span></label>
-                                <select name="item2_adhesive" id="item2_adhesive">
-                                    <option value="">Select Adhesive Option</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                                <input type="text" name="item2_adhesive_other" id="item2_adhesive_other" placeholder="Please specify adhesive option" style="display:none; margin-top:10px;">
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Print</label>
+                                    <select name="item2_print" id="item2_print">
+                                        <option value="">Select Print Option</option>
+                                        <option value="One Side">One Side</option>
+                                        <option value="Two Side">Two Side</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <input type="text" name="item2_print_other" id="item2_print_other" placeholder="Please specify print option" style="display:none; margin-top:10px;">
+                                </div>
+                                <div class="form-group"></div>
                             </div>
                             
                             <div class="form-group">
-                                <label>Variable Data <span class="required">*</span></label>
-                                <select name="item2_variable_data" id="item2_variable_data">
-                                    <option value="">Select Variable Data Option</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                                <input type="text" name="item2_variable_data_other" id="item2_variable_data_other" placeholder="Please specify variable data option" style="display:none; margin-top:10px;">
+                                <label>Print Method <span class="quantity-hint">(select all that apply)</span></label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" name="item2_print_method" value="Digital" id="item2_pm_digital">
+                                        <label for="item2_pm_digital">Digital</label>
+                                    </div>
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" name="item2_print_method" value="Etch and Fill" id="item2_pm_etchfill">
+                                        <label for="item2_pm_etchfill">Etch and Fill</label>
+                                    </div>
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" name="item2_print_method" value="Etch, No Fill" id="item2_pm_etchno">
+                                        <label for="item2_pm_etchno">Etch, No Fill</label>
+                                    </div>
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" name="item2_print_method" value="Other" id="item2_pm_other">
+                                        <label for="item2_pm_other">Other</label>
+                                    </div>
+                                    <input type="text" name="item2_print_method_other" id="item2_print_method_other" placeholder="Please specify other print method" class="checkbox-other-input">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Print Color</label>
+                                    <select name="item2_print_color" id="item2_print_color">
+                                        <option value="">Select Print Color</option>
+                                        <option value="Black">Black</option>
+                                        <option value="Multiple Colors">Multiple Colors</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <input type="text" name="item2_print_color_other" id="item2_print_color_other" placeholder="Please specify print color" style="display:none; margin-top:10px;">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Hole</label>
+                                    <select name="item2_hole" id="item2_hole">
+                                        <option value="">Select Hole Option</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                        <option value="Multiple">Multiple</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <input type="text" name="item2_hole_other" id="item2_hole_other" placeholder="Please specify hole option" style="display:none; margin-top:10px;">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Adhesive</label>
+                                    <select name="item2_adhesive" id="item2_adhesive">
+                                        <option value="">Select Adhesive Option</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <input type="text" name="item2_adhesive_other" id="item2_adhesive_other" placeholder="Please specify adhesive option" style="display:none; margin-top:10px;">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Variable Data</label>
+                                    <select name="item2_variable_data_metal" id="item2_variable_data_metal">
+                                        <option value="">Select Option</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <input type="text" name="item2_variable_data_metal_other" id="item2_variable_data_metal_other" placeholder="Please specify" style="display:none; margin-top:10px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- MAGNETS SPECS - ITEM 2 -->
+                    <div id="item2_magnet_specs" class="product-specs">
+                        <div class="form-section">
+                            <h2>Magnet Specifications</h2>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Laminated</label>
+                                    <select name="item2_laminated_magnet">
+                                        <option value="Yes" selected>Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Print</label>
+                                    <select name="item2_print_magnet" id="item2_print_magnet">
+                                        <option value="">Select Print Option</option>
+                                        <option value="Single Color">Single Color</option>
+                                        <option value="Multi Color">Multi Color</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <input type="text" name="item2_print_magnet_other" id="item2_print_magnet_other" placeholder="Please specify" style="display:none; margin-top:10px;">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Variable Data</label>
+                                    <select name="item2_variable_data_magnet">
+                                        <option value="">Select Option</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="form-group"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- LABELS SPECS - ITEM 2 -->
+                    <div id="item2_label_specs" class="product-specs">
+                        <div class="form-section">
+                            <h2>Custom Label Specifications</h2>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Material</label>
+                                    <select name="item2_material_label" id="item2_material_label">
+                                        <option value="">Select Material</option>
+                                        <option value="Poly">Poly</option>
+                                        <option value="Vinyl">Vinyl</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <input type="text" name="item2_material_label_other" id="item2_material_label_other" placeholder="Please specify material" style="display:none; margin-top:10px;">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Laminated</label>
+                                    <select name="item2_laminated_label">
+                                        <option value="Yes" selected>Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Print</label>
+                                    <select name="item2_print_label" id="item2_print_label">
+                                        <option value="">Select Print Option</option>
+                                        <option value="Single Color">Single Color</option>
+                                        <option value="Multi Color">Multi Color</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <input type="text" name="item2_print_label_other" id="item2_print_label_other" placeholder="Please specify" style="display:none; margin-top:10px;">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Variable Data</label>
+                                    <select name="item2_variable_data_label">
+                                        <option value="">Select Option</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -671,7 +865,7 @@
                     <div class="form-section">
                         <h2>Additional Information</h2>
                         <div class="form-group">
-                            <label>Other / Special Requests</label>
+                            <label>Other Comments / Special Requests</label>
                             <textarea name="item2_other_info" placeholder="Enter any additional information or special requests here..."></textarea>
                         </div>
                     </div>
@@ -710,7 +904,57 @@
             }
         });
         
-        // Handle "Other" checkbox for Item 1
+        // Handle Product Type change for Item 1
+        document.getElementById('item1_product_type').addEventListener('change', function() {
+            const metalSpecs = document.getElementById('item1_metal_specs');
+            const magnetSpecs = document.getElementById('item1_magnet_specs');
+            const labelSpecs = document.getElementById('item1_label_specs');
+            const otherTextarea = document.getElementById('item1_product_type_other');
+            
+            // Hide all specs
+            metalSpecs.classList.remove('active');
+            magnetSpecs.classList.remove('active');
+            labelSpecs.classList.remove('active');
+            otherTextarea.style.display = 'none';
+            
+            // Show relevant specs
+            if (this.value === 'Metal Tags') {
+                metalSpecs.classList.add('active');
+            } else if (this.value === 'Magnets') {
+                magnetSpecs.classList.add('active');
+            } else if (this.value === 'Custom Labels') {
+                labelSpecs.classList.add('active');
+            } else if (this.value === 'Other') {
+                otherTextarea.style.display = 'block';
+            }
+        });
+        
+        // Handle Product Type change for Item 2
+        document.getElementById('item2_product_type').addEventListener('change', function() {
+            const metalSpecs = document.getElementById('item2_metal_specs');
+            const magnetSpecs = document.getElementById('item2_magnet_specs');
+            const labelSpecs = document.getElementById('item2_label_specs');
+            const otherTextarea = document.getElementById('item2_product_type_other');
+            
+            // Hide all specs
+            metalSpecs.classList.remove('active');
+            magnetSpecs.classList.remove('active');
+            labelSpecs.classList.remove('active');
+            otherTextarea.style.display = 'none';
+            
+            // Show relevant specs
+            if (this.value === 'Metal Tags') {
+                metalSpecs.classList.add('active');
+            } else if (this.value === 'Magnets') {
+                magnetSpecs.classList.add('active');
+            } else if (this.value === 'Custom Labels') {
+                labelSpecs.classList.add('active');
+            } else if (this.value === 'Other') {
+                otherTextarea.style.display = 'block';
+            }
+        });
+        
+        // Handle "Other" checkbox for Metal Tags - Item 1
         document.getElementById('item1_mat_other').addEventListener('change', function() {
             document.getElementById('item1_material_other').style.display = this.checked ? 'block' : 'none';
         });
@@ -721,7 +965,7 @@
             document.getElementById('item1_print_method_other').style.display = this.checked ? 'block' : 'none';
         });
         
-        // Handle "Other" checkbox for Item 2
+        // Handle "Other" checkbox for Metal Tags - Item 2
         document.getElementById('item2_mat_other').addEventListener('change', function() {
             document.getElementById('item2_material_other').style.display = this.checked ? 'block' : 'none';
         });
@@ -732,40 +976,32 @@
             document.getElementById('item2_print_method_other').style.display = this.checked ? 'block' : 'none';
         });
         
-        // Handle "Other" dropdowns for Item 1
-        const item1DropdownFields = ['item1_product_type', 'item1_print', 'item1_print_color', 'item1_hole', 'item1_adhesive', 'item1_variable_data'];
-        item1DropdownFields.forEach(fieldName => {
+        // Handle "Other" dropdowns - Item 1
+        const item1Dropdowns = [
+            'item1_print', 'item1_print_color', 'item1_hole', 'item1_adhesive', 'item1_variable_data_metal',
+            'item1_print_magnet', 'item1_material_label', 'item1_print_label'
+        ];
+        item1Dropdowns.forEach(fieldName => {
             const dropdown = document.getElementById(fieldName);
             const otherInput = document.getElementById(fieldName + '_other');
             if (dropdown && otherInput) {
                 dropdown.addEventListener('change', function() {
-                    if (this.value === 'Other') {
-                        otherInput.style.display = 'block';
-                        otherInput.required = true;
-                    } else {
-                        otherInput.style.display = 'none';
-                        otherInput.required = false;
-                        otherInput.value = '';
-                    }
+                    otherInput.style.display = this.value === 'Other' ? 'block' : 'none';
                 });
             }
         });
         
-        // Handle "Other" dropdowns for Item 2
-        const item2DropdownFields = ['item2_product_type', 'item2_print', 'item2_print_color', 'item2_hole', 'item2_adhesive', 'item2_variable_data'];
-        item2DropdownFields.forEach(fieldName => {
+        // Handle "Other" dropdowns - Item 2
+        const item2Dropdowns = [
+            'item2_print', 'item2_print_color', 'item2_hole', 'item2_adhesive', 'item2_variable_data_metal',
+            'item2_print_magnet', 'item2_material_label', 'item2_print_label'
+        ];
+        item2Dropdowns.forEach(fieldName => {
             const dropdown = document.getElementById(fieldName);
             const otherInput = document.getElementById(fieldName + '_other');
             if (dropdown && otherInput) {
                 dropdown.addEventListener('change', function() {
-                    if (this.value === 'Other') {
-                        otherInput.style.display = 'block';
-                        otherInput.required = true;
-                    } else {
-                        otherInput.style.display = 'none';
-                        otherInput.required = false;
-                        otherInput.value = '';
-                    }
+                    otherInput.style.display = this.value === 'Other' ? 'block' : 'none';
                 });
             }
         });
@@ -776,8 +1012,7 @@
             
             if (this.checked) {
                 container.style.display = 'block';
-                // Only set required for dropdown fields, not checkboxes
-                const item2Fields = ['item2_product_type', 'item2_quantity', 'item2_size', 'item2_print', 'item2_print_color', 'item2_hole', 'item2_adhesive', 'item2_variable_data'];
+                const item2Fields = ['item2_product_type', 'item2_quantity', 'item2_size'];
                 item2Fields.forEach(fieldId => {
                     const field = document.getElementById(fieldId);
                     if (field) field.required = true;
@@ -788,8 +1023,7 @@
                 }, 100);
             } else {
                 container.style.display = 'none';
-                // Remove required from dropdown fields
-                const item2Fields = ['item2_product_type', 'item2_quantity', 'item2_size', 'item2_print', 'item2_print_color', 'item2_hole', 'item2_adhesive', 'item2_variable_data'];
+                const item2Fields = ['item2_product_type', 'item2_quantity', 'item2_size'];
                 item2Fields.forEach(fieldId => {
                     const field = document.getElementById(fieldId);
                     if (field) field.required = false;
@@ -801,7 +1035,6 @@
         document.getElementById('quoteForm').addEventListener('submit', function(e) {
             const formData = new FormData(this);
             
-            // Helper to get checkbox values
             const getCheckboxValues = (name) => {
                 const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
                 const values = [];
@@ -820,7 +1053,6 @@
                 return values.length > 0 ? values.join(', ') : '';
             };
             
-            // Helper for dropdown with Other
             const getDropdownValue = (field) => {
                 const value = formData.get(field);
                 if (value === 'Other') {
@@ -836,41 +1068,67 @@
             
             // Item 1
             formatted += '--- ITEM 1 ---\n';
-            formatted += 'Product Type: ' + getDropdownValue('item1_product_type') + '\n';
+            const item1Type = formData.get('item1_product_type');
+            formatted += 'Product Type: ' + (item1Type === 'Other' ? formData.get('item1_product_type_other') : item1Type) + '\n';
             formatted += 'Quantity: ' + formData.get('item1_quantity') + '\n';
             formatted += 'Size: ' + formData.get('item1_size') + '\n';
-            formatted += 'Material: ' + getCheckboxValues('item1_material') + '\n';
-            formatted += 'Thickness: ' + getCheckboxValues('item1_thickness') + '\n';
-            formatted += 'Print: ' + getDropdownValue('item1_print') + '\n';
-            formatted += 'Print Method: ' + getCheckboxValues('item1_print_method') + '\n';
-            formatted += 'Print Color: ' + getDropdownValue('item1_print_color') + '\n';
-            formatted += 'Hole: ' + getDropdownValue('item1_hole') + '\n';
-            formatted += 'Adhesive: ' + getDropdownValue('item1_adhesive') + '\n';
-            formatted += 'Variable Data: ' + getDropdownValue('item1_variable_data') + '\n';
+            
+            if (item1Type === 'Metal Tags') {
+                formatted += 'Material: ' + getCheckboxValues('item1_material') + '\n';
+                formatted += 'Thickness: ' + getCheckboxValues('item1_thickness') + '\n';
+                formatted += 'Print: ' + getDropdownValue('item1_print') + '\n';
+                formatted += 'Print Method: ' + getCheckboxValues('item1_print_method') + '\n';
+                formatted += 'Print Color: ' + getDropdownValue('item1_print_color') + '\n';
+                formatted += 'Hole: ' + getDropdownValue('item1_hole') + '\n';
+                formatted += 'Adhesive: ' + getDropdownValue('item1_adhesive') + '\n';
+                formatted += 'Variable Data: ' + getDropdownValue('item1_variable_data_metal') + '\n';
+            } else if (item1Type === 'Magnets') {
+                formatted += 'Laminated: ' + (formData.get('item1_laminated_magnet') || 'Yes') + '\n';
+                formatted += 'Print: ' + getDropdownValue('item1_print_magnet') + '\n';
+                formatted += 'Variable Data: ' + (formData.get('item1_variable_data_magnet') || '') + '\n';
+            } else if (item1Type === 'Custom Labels') {
+                formatted += 'Material: ' + getDropdownValue('item1_material_label') + '\n';
+                formatted += 'Laminated: ' + (formData.get('item1_laminated_label') || 'Yes') + '\n';
+                formatted += 'Print: ' + getDropdownValue('item1_print_label') + '\n';
+                formatted += 'Variable Data: ' + (formData.get('item1_variable_data_label') || '') + '\n';
+            }
             
             const item1Other = formData.get('item1_other_info');
             if (item1Other && item1Other.trim()) {
-                formatted += 'Other: ' + item1Other + '\n';
+                formatted += 'Other Comments: ' + item1Other + '\n';
             }
             
             // Item 2 (if checkbox is checked)
             if (document.getElementById('addAnotherItem').checked) {
                 formatted += '\n--- ITEM 2 ---\n';
-                formatted += 'Product Type: ' + getDropdownValue('item2_product_type') + '\n';
+                const item2Type = formData.get('item2_product_type');
+                formatted += 'Product Type: ' + (item2Type === 'Other' ? formData.get('item2_product_type_other') : item2Type) + '\n';
                 formatted += 'Quantity: ' + formData.get('item2_quantity') + '\n';
                 formatted += 'Size: ' + formData.get('item2_size') + '\n';
-                formatted += 'Material: ' + getCheckboxValues('item2_material') + '\n';
-                formatted += 'Thickness: ' + getCheckboxValues('item2_thickness') + '\n';
-                formatted += 'Print: ' + getDropdownValue('item2_print') + '\n';
-                formatted += 'Print Method: ' + getCheckboxValues('item2_print_method') + '\n';
-                formatted += 'Print Color: ' + getDropdownValue('item2_print_color') + '\n';
-                formatted += 'Hole: ' + getDropdownValue('item2_hole') + '\n';
-                formatted += 'Adhesive: ' + getDropdownValue('item2_adhesive') + '\n';
-                formatted += 'Variable Data: ' + getDropdownValue('item2_variable_data') + '\n';
+                
+                if (item2Type === 'Metal Tags') {
+                    formatted += 'Material: ' + getCheckboxValues('item2_material') + '\n';
+                    formatted += 'Thickness: ' + getCheckboxValues('item2_thickness') + '\n';
+                    formatted += 'Print: ' + getDropdownValue('item2_print') + '\n';
+                    formatted += 'Print Method: ' + getCheckboxValues('item2_print_method') + '\n';
+                    formatted += 'Print Color: ' + getDropdownValue('item2_print_color') + '\n';
+                    formatted += 'Hole: ' + getDropdownValue('item2_hole') + '\n';
+                    formatted += 'Adhesive: ' + getDropdownValue('item2_adhesive') + '\n';
+                    formatted += 'Variable Data: ' + getDropdownValue('item2_variable_data_metal') + '\n';
+                } else if (item2Type === 'Magnets') {
+                    formatted += 'Laminated: ' + (formData.get('item2_laminated_magnet') || 'Yes') + '\n';
+                    formatted += 'Print: ' + getDropdownValue('item2_print_magnet') + '\n';
+                    formatted += 'Variable Data: ' + (formData.get('item2_variable_data_magnet') || '') + '\n';
+                } else if (item2Type === 'Custom Labels') {
+                    formatted += 'Material: ' + getDropdownValue('item2_material_label') + '\n';
+                    formatted += 'Laminated: ' + (formData.get('item2_laminated_label') || 'Yes') + '\n';
+                    formatted += 'Print: ' + getDropdownValue('item2_print_label') + '\n';
+                    formatted += 'Variable Data: ' + (formData.get('item2_variable_data_label') || '') + '\n';
+                }
                 
                 const item2Other = formData.get('item2_other_info');
                 if (item2Other && item2Other.trim()) {
-                    formatted += 'Other: ' + item2Other + '\n';
+                    formatted += 'Other Comments: ' + item2Other + '\n';
                 }
             }
             
