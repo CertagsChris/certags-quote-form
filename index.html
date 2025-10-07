@@ -192,6 +192,7 @@
             padding: 8px 12px;
             border-radius: 4px;
             display: none;
+            word-wrap: break-word;
         }
         
         .file-name.active {
@@ -658,11 +659,11 @@
                     <div class="form-section">
                         <h2>Design</h2>
                         <div class="form-group">
-                            <label>Upload Design File</label>
+                            <label>Upload Design File(s)</label>
                             <div class="file-upload">
-                                <input type="file" id="designFile${itemNum}" name="design_file_${itemNum}" accept=".pdf,.ai,.eps,.jpg,.jpeg,.png,.svg">
+                                <input type="file" id="designFile${itemNum}" name="design_file_${itemNum}" accept=".pdf,.ai,.eps,.jpg,.jpeg,.png,.svg" multiple>
                                 <label for="designFile${itemNum}" class="file-upload-label">
-                                    📎 Click to upload design file (PDF, AI, EPS, JPG, PNG, SVG)
+                                    📎 Click to upload design files (PDF, AI, EPS, JPG, PNG, SVG) - Multiple files allowed
                                 </label>
                             </div>
                             <div class="file-name" id="fileName${itemNum}"></div>
@@ -719,10 +720,11 @@
             const fileInput = document.getElementById(`designFile${itemNum}`);
             if (fileInput) {
                 fileInput.addEventListener('change', function(e) {
-                    const fileName = e.target.files[0]?.name || '';
+                    const files = e.target.files;
                     const fileNameDisplay = document.getElementById(`fileName${itemNum}`);
-                    if (fileName) {
-                        fileNameDisplay.textContent = '✅ File uploaded: ' + fileName;
+                    if (files.length > 0) {
+                        const fileNames = Array.from(files).map(f => f.name).join(', ');
+                        fileNameDisplay.textContent = `✅ ${files.length} file(s) uploaded: ${fileNames}`;
                         fileNameDisplay.classList.add('active');
                     } else {
                         fileNameDisplay.textContent = '';
