@@ -285,6 +285,7 @@
                 <input type="text" name="_honey" style="display:none">
                 <input type="hidden" name="_template" value="box">
                 <input type="hidden" name="QUOTE_SUMMARY" id="formatted_quote">
+                <input type="hidden" name="sales_rep_email" id="sales_rep_email_visible">
                 
                 <div class="form-section">
                     <h2>Request Information</h2>
@@ -607,6 +608,16 @@
                             <label>Other Comments / Special Requests</label>
                             <textarea name="item${itemNum}_other_info" placeholder="Enter any additional information or special requests here..."></textarea>
                         </div>
+                        
+                        <div class="form-group">
+                            <label>Previously Quoted / Ordered? <span class="required">*</span></label>
+                            <select name="item${itemNum}_previously_quoted" id="item${itemNum}_previously_quoted" ${isFirst ? 'required' : ''} class="item-required-field">
+                                <option value="">Select Option</option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                            <input type="text" name="item${itemNum}_previously_quoted_details" id="item${itemNum}_previously_quoted_details" placeholder="Please provide IN#, Quote Date, or similar details" style="display:none; margin-top:10px;">
+                        </div>
                     </div>
                     
                     ${itemNum < 5 ? `
@@ -717,6 +728,22 @@
                 }
             });
             
+            // Handle "Previously Quoted" field
+            const prevQuoted = document.getElementById(`item${itemNum}_previously_quoted`);
+            const prevQuotedDetails = document.getElementById(`item${itemNum}_previously_quoted_details`);
+            if (prevQuoted && prevQuotedDetails) {
+                prevQuoted.addEventListener('change', function() {
+                    if (this.value === 'Yes') {
+                        prevQuotedDetails.style.display = 'block';
+                        prevQuotedDetails.required = true;
+                    } else {
+                        prevQuotedDetails.style.display = 'none';
+                        prevQuotedDetails.required = false;
+                        prevQuotedDetails.value = '';
+                    }
+                });
+            }
+            
             // Add next item checkbox
             if (itemNum < 5) {
                 const addNextItem = document.getElementById(`addItem${itemNum + 1}`);
@@ -735,9 +762,11 @@
                             const nextProductType = document.getElementById(`item${itemNum + 1}_product_type`);
                             const nextQuantity = document.getElementById(`item${itemNum + 1}_quantity`);
                             const nextSize = document.getElementById(`item${itemNum + 1}_size`);
+                            const nextPrevQuoted = document.getElementById(`item${itemNum + 1}_previously_quoted`);
                             if (nextProductType) nextProductType.required = true;
                             if (nextQuantity) nextQuantity.required = true;
                             if (nextSize) nextSize.required = true;
+                            if (nextPrevQuoted) nextPrevQuoted.required = true;
                             
                             setTimeout(() => {
                                 nextContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -752,9 +781,11 @@
                             const nextProductType = document.getElementById(`item${itemNum + 1}_product_type`);
                             const nextQuantity = document.getElementById(`item${itemNum + 1}_quantity`);
                             const nextSize = document.getElementById(`item${itemNum + 1}_size`);
+                            const nextPrevQuoted = document.getElementById(`item${itemNum + 1}_previously_quoted`);
                             if (nextProductType) nextProductType.required = false;
                             if (nextQuantity) nextQuantity.required = false;
                             if (nextSize) nextSize.required = false;
+                            if (nextPrevQuoted) nextPrevQuoted.required = false;
                             
                             // Clear all form data for next item and subsequent items
                             for (let j = itemNum + 1; j <= 5; j++) {
@@ -835,6 +866,7 @@
             // Set reply-to email
             if (repEmails[salesRep]) {
                 document.getElementById('reply_to_email').value = repEmails[salesRep];
+                document.getElementById('sales_rep_email_visible').value = repEmails[salesRep];
             }
             
             // Set dynamic subject line with product type(s)
@@ -943,6 +975,19 @@
                 const itemOther = formData.get(`item${i}_other_info`);
                 if (itemOther && itemOther.trim()) {
                     formatted += 'Other Comments: ' + itemOther + '\n';
+                }
+                
+                // Previously Quoted info
+                const prevQuoted = formData.get(`item${i}_previously_quoted`);
+                if (prevQuoted) {
+                    formatted += 'Previously Quoted/Ordered: ' + prevQuoted;
+                    if (prevQuoted === 'Yes') {
+                        const details = formData.get(`item${i}_previously_quoted_details`);
+                        if (details && details.trim()) {
+                            formatted += ' (' + details.trim() + ')';
+                        }
+                    }
+                    formatted += '\n';
                 }
                 
                 if (i < itemCount) formatted += '\n';
