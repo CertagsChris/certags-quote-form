@@ -104,6 +104,82 @@
                 container.style.display = 'none';
             }
         });
+        
+        // Format quote data before submission - Main Form
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            const formData = new FormData(this);
+            
+            // Helper function to get value with "Other" handling
+            const getValue = (field) => {
+                const value = formData.get(field);
+                if (value === 'Other') {
+                    return formData.get(field + '_other') || 'Other';
+                }
+                return value || '';
+            };
+            
+            // Create formatted quote string
+            let formatted = '=== QUOTE REQUEST ===\n\n';
+            formatted += 'Sales Rep: ' + formData.get('sales_rep') + '\n';
+            formatted += 'Customer: ' + formData.get('customer_company') + '\n';
+            formatted += 'Product Type: ' + getValue('product_type') + '\n';
+            formatted += 'Quantity: ' + formData.get('quantity') + '\n';
+            formatted += 'Size: ' + formData.get('size') + '\n';
+            formatted += 'Material: ' + getValue('material') + '\n';
+            formatted += 'Thickness: ' + getValue('thickness') + '\n';
+            formatted += 'Print: ' + getValue('print') + '\n';
+            formatted += 'Print Method: ' + getValue('print_method') + '\n';
+            formatted += 'Print Color: ' + getValue('print_color') + '\n';
+            formatted += 'Hole: ' + getValue('hole') + '\n';
+            formatted += 'Adhesive: ' + getValue('adhesive') + '\n';
+            formatted += 'Variable Data: ' + getValue('variable_data') + '\n';
+            
+            const otherInfo = formData.get('other_info');
+            if (otherInfo && otherInfo.trim()) {
+                formatted += 'Other: ' + otherInfo + '\n';
+            }
+            
+            // Set the hidden field
+            document.getElementById('formatted_quote').value = formatted;
+        });
+        
+        // Format quote data before submission - Additional Item Form
+        document.getElementById('additionalItemForm').addEventListener('submit', function(e) {
+            const formData = new FormData(this);
+            
+            // Helper function to get value with "Other" handling
+            const getValue = (field) => {
+                const value = formData.get(field);
+                if (value === 'Other') {
+                    return formData.get(field + '_other') || 'Other';
+                }
+                return value || '';
+            };
+            
+            // Create formatted quote string
+            let formatted = '=== ADDITIONAL ITEM - QUOTE REQUEST ===\n\n';
+            formatted += 'Sales Rep: ' + formData.get('sales_rep') + '\n';
+            formatted += 'Customer: ' + formData.get('customer_company') + '\n';
+            formatted += 'Product Type: ' + getValue('product_type') + '\n';
+            formatted += 'Quantity: ' + formData.get('quantity') + '\n';
+            formatted += 'Size: ' + formData.get('size') + '\n';
+            formatted += 'Material: ' + getValue('material') + '\n';
+            formatted += 'Thickness: ' + getValue('thickness') + '\n';
+            formatted += 'Print: ' + getValue('print') + '\n';
+            formatted += 'Print Method: ' + getValue('print_method') + '\n';
+            formatted += 'Print Color: ' + getValue('print_color') + '\n';
+            formatted += 'Hole: ' + getValue('hole') + '\n';
+            formatted += 'Adhesive: ' + getValue('adhesive') + '\n';
+            formatted += 'Variable Data: ' + getValue('variable_data') + '\n';
+            
+            const otherInfo = formData.get('other_info');
+            if (otherInfo && otherInfo.trim()) {
+                formatted += 'Other: ' + otherInfo + '\n';
+            }
+            
+            // Set the hidden field
+            document.getElementById('formatted_quote_2').value = formatted;
+        });
     </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -343,6 +419,8 @@
                 <input type="hidden" name="_captcha" value="false">
                 <input type="text" name="_honey" style="display:none">
                 <input type="hidden" name="_template" value="box">
+                <input type="hidden" name="_autoresponse" value="Thank you for submitting a quote request. We will process this shortly.">
+                <input type="hidden" name="formatted_quote" id="formatted_quote">
                 
                 <!-- Sales Rep & Customer Info -->
                 <div class="form-section">
@@ -557,6 +635,7 @@
                         <input type="hidden" name="_captcha" value="false">
                         <input type="text" name="_honey" style="display:none">
                         <input type="hidden" name="_template" value="box">
+                        <input type="hidden" name="formatted_quote" id="formatted_quote_2">
                         
                         <!-- Hidden fields to carry over customer info -->
                         <input type="hidden" name="sales_rep" id="hiddenSalesRep">
