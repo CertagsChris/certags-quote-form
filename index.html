@@ -588,6 +588,73 @@
                         </div>
                     </div>
                     
+                    <!-- Other Product Specs -->
+                    <div id="item${itemNum}_other_specs" class="product-specs">
+                        <div class="form-section">
+                            <h2>Product Specifications</h2>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Material</label>
+                                    <input type="text" name="item${itemNum}_material_other_product" placeholder="Enter material">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Thickness</label>
+                                    <input type="text" name="item${itemNum}_thickness_other_product" placeholder="Enter thickness">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>One Side or Two Side</label>
+                                    <input type="text" name="item${itemNum}_sides_other_product" placeholder="Enter one side or two side">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Print Color(s)</label>
+                                    <input type="text" name="item${itemNum}_print_colors_other_product" placeholder="Enter print colors">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Print Method</label>
+                                    <input type="text" name="item${itemNum}_print_method_other_product" placeholder="Enter print method">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Laminate</label>
+                                    <input type="text" name="item${itemNum}_laminate_other_product" placeholder="Enter laminate info">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Adhesive</label>
+                                    <input type="text" name="item${itemNum}_adhesive_other_product" placeholder="Enter adhesive info">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Hole</label>
+                                    <input type="text" name="item${itemNum}_hole_other_product" placeholder="Enter hole info">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Variable Data</label>
+                                    <input type="text" name="item${itemNum}_variable_data_other_product" placeholder="Enter variable data info">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Other</label>
+                                    <input type="text" name="item${itemNum}_other_field_other_product" placeholder="Enter other specifications">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="form-section">
                         <h2>Design</h2>
                         <div class="form-group">
@@ -671,11 +738,13 @@
                     const metalSpecs = document.getElementById(`item${itemNum}_metal_specs`);
                     const magnetSpecs = document.getElementById(`item${itemNum}_magnet_specs`);
                     const labelSpecs = document.getElementById(`item${itemNum}_label_specs`);
+                    const otherSpecs = document.getElementById(`item${itemNum}_other_specs`);
                     const otherTextarea = document.getElementById(`item${itemNum}_product_type_other`);
                     
                     metalSpecs.classList.remove('active');
                     magnetSpecs.classList.remove('active');
                     labelSpecs.classList.remove('active');
+                    otherSpecs.classList.remove('active');
                     otherTextarea.style.display = 'none';
                     
                     if (this.value === 'Metal Tags') {
@@ -685,6 +754,7 @@
                     } else if (this.value === 'Custom Labels') {
                         labelSpecs.classList.add('active');
                     } else if (this.value === 'Other') {
+                        otherSpecs.classList.add('active');
                         otherTextarea.style.display = 'block';
                     }
                 });
