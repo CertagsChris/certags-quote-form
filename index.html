@@ -61,6 +61,16 @@
             border-bottom: 2px solid #FFD700;
         }
         
+        .item-header {
+            background: #FFD700;
+            color: #1a1a1a;
+            padding: 15px;
+            margin: 30px -40px 20px -40px;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -70,10 +80,6 @@
         
         .form-group {
             margin-bottom: 20px;
-        }
-        
-        .form-group.full-width {
-            grid-column: 1 / -1;
         }
         
         label {
@@ -89,7 +95,6 @@
         }
         
         input[type="text"],
-        input[type="number"],
         select,
         textarea {
             width: 100%;
@@ -102,7 +107,6 @@
         }
         
         input[type="text"]:focus,
-        input[type="number"]:focus,
         select:focus,
         textarea:focus {
             outline: none;
@@ -191,6 +195,10 @@
             transform: translateY(0);
         }
         
+        #item2Container {
+            display: none;
+        }
+        
         @media (max-width: 768px) {
             .form-row {
                 grid-template-columns: 1fr;
@@ -198,6 +206,11 @@
             
             .form-content {
                 padding: 25px;
+            }
+            
+            .item-header {
+                margin-left: -25px;
+                margin-right: -25px;
             }
         }
     </style>
@@ -238,18 +251,24 @@
                             <input type="text" name="customer_company" required>
                         </div>
                     </div>
-                    
+                </div>
+                
+                <!-- ITEM 1 -->
+                <div class="item-header">ITEM 1</div>
+                
+                <div class="form-section">
+                    <h2>Product Information</h2>
                     <div class="form-row">
                         <div class="form-group">
                             <label>Product Type <span class="required">*</span></label>
-                            <select name="product_type" id="product_type" required>
+                            <select name="item1_product_type" id="item1_product_type" required>
                                 <option value="">Select Product Type</option>
                                 <option value="Metal Tags">Metal Tags</option>
                                 <option value="Magnets">Magnets</option>
                                 <option value="Custom Labels">Custom Labels</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <input type="text" name="product_type_other" id="product_type_other" placeholder="Please specify product type" style="display:none; margin-top:10px;">
+                            <input type="text" name="item1_product_type_other" id="item1_product_type_other" placeholder="Please specify product type" style="display:none; margin-top:10px;">
                         </div>
                         <div class="form-group"></div>
                     </div>
@@ -260,13 +279,13 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Quantity <span class="required">*</span></label>
-                            <input type="text" name="quantity" required placeholder="e.g., 500 or 500 / 1000 / 2000">
+                            <input type="text" name="item1_quantity" required placeholder="e.g., 500 or 500 / 1000 / 2000">
                             <div class="quantity-hint">Enter single quantity or multiple tiers separated by slashes</div>
                         </div>
                         
                         <div class="form-group">
                             <label>Size <span class="required">*</span></label>
-                            <input type="text" name="size" required placeholder="e.g., 3 x 5 (inches assumed)">
+                            <input type="text" name="item1_size" required placeholder="e.g., 3 x 5 (inches assumed)">
                             <div class="quantity-hint">Enter dimensions - inches assumed unless otherwise specified</div>
                         </div>
                     </div>
@@ -277,98 +296,98 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Material <span class="required">*</span></label>
-                            <select name="material" id="material" required>
+                            <select name="item1_material" id="item1_material" required>
                                 <option value="">Select Material</option>
                                 <option value="Aluminum">Aluminum</option>
                                 <option value="Stainless Steel">Stainless Steel</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <input type="text" name="material_other" id="material_other" placeholder="Please specify material" style="display:none; margin-top:10px;">
+                            <input type="text" name="item1_material_other" id="item1_material_other" placeholder="Please specify material" style="display:none; margin-top:10px;">
                         </div>
                         
                         <div class="form-group">
                             <label>Thickness <span class="required">*</span></label>
-                            <select name="thickness" id="thickness" required>
+                            <select name="item1_thickness" id="item1_thickness" required>
                                 <option value="">Select Thickness</option>
                                 <option value="0.5mm">0.5 mm</option>
                                 <option value="1mm">1 mm</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <input type="text" name="thickness_other" id="thickness_other" placeholder="Please specify thickness" style="display:none; margin-top:10px;">
+                            <input type="text" name="item1_thickness_other" id="item1_thickness_other" placeholder="Please specify thickness" style="display:none; margin-top:10px;">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label>Print <span class="required">*</span></label>
-                            <select name="print" id="print" required>
+                            <select name="item1_print" id="item1_print" required>
                                 <option value="">Select Print Option</option>
                                 <option value="One Side">One Side</option>
                                 <option value="Two Side">Two Side</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <input type="text" name="print_other" id="print_other" placeholder="Please specify print option" style="display:none; margin-top:10px;">
+                            <input type="text" name="item1_print_other" id="item1_print_other" placeholder="Please specify print option" style="display:none; margin-top:10px;">
                         </div>
                         
                         <div class="form-group">
                             <label>Print Method <span class="required">*</span></label>
-                            <select name="print_method" id="print_method" required>
+                            <select name="item1_print_method" id="item1_print_method" required>
                                 <option value="">Select Print Method</option>
                                 <option value="Digital">Digital</option>
                                 <option value="Etch and Fill">Etch and Fill</option>
                                 <option value="Etch, No Fill">Etch, No Fill</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <input type="text" name="print_method_other" id="print_method_other" placeholder="Please specify print method" style="display:none; margin-top:10px;">
+                            <input type="text" name="item1_print_method_other" id="item1_print_method_other" placeholder="Please specify print method" style="display:none; margin-top:10px;">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label>Print Color <span class="required">*</span></label>
-                            <select name="print_color" id="print_color" required>
+                            <select name="item1_print_color" id="item1_print_color" required>
                                 <option value="">Select Print Color</option>
                                 <option value="Black">Black</option>
                                 <option value="Multiple Colors">Multiple Colors</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <input type="text" name="print_color_other" id="print_color_other" placeholder="Please specify print color" style="display:none; margin-top:10px;">
+                            <input type="text" name="item1_print_color_other" id="item1_print_color_other" placeholder="Please specify print color" style="display:none; margin-top:10px;">
                         </div>
                         
                         <div class="form-group">
                             <label>Hole <span class="required">*</span></label>
-                            <select name="hole" id="hole" required>
+                            <select name="item1_hole" id="item1_hole" required>
                                 <option value="">Select Hole Option</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                                 <option value="Multiple">Multiple</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <input type="text" name="hole_other" id="hole_other" placeholder="Please specify hole option" style="display:none; margin-top:10px;">
+                            <input type="text" name="item1_hole_other" id="item1_hole_other" placeholder="Please specify hole option" style="display:none; margin-top:10px;">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label>Adhesive <span class="required">*</span></label>
-                            <select name="adhesive" id="adhesive" required>
+                            <select name="item1_adhesive" id="item1_adhesive" required>
                                 <option value="">Select Adhesive Option</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <input type="text" name="adhesive_other" id="adhesive_other" placeholder="Please specify adhesive option" style="display:none; margin-top:10px;">
+                            <input type="text" name="item1_adhesive_other" id="item1_adhesive_other" placeholder="Please specify adhesive option" style="display:none; margin-top:10px;">
                         </div>
                         
                         <div class="form-group">
                             <label>Variable Data <span class="required">*</span></label>
-                            <select name="variable_data" id="variable_data" required>
+                            <select name="item1_variable_data" id="item1_variable_data" required>
                                 <option value="">Select Variable Data Option</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <input type="text" name="variable_data_other" id="variable_data_other" placeholder="Please specify variable data option" style="display:none; margin-top:10px;">
+                            <input type="text" name="item1_variable_data_other" id="item1_variable_data_other" placeholder="Please specify variable data option" style="display:none; margin-top:10px;">
                         </div>
                     </div>
                 </div>
@@ -378,12 +397,12 @@
                     <div class="form-group">
                         <label>Upload Design File</label>
                         <div class="file-upload">
-                            <input type="file" id="designFile" name="design_file" accept=".pdf,.ai,.eps,.jpg,.jpeg,.png,.svg">
-                            <label for="designFile" class="file-upload-label">
+                            <input type="file" id="designFile1" name="item1_design_file" accept=".pdf,.ai,.eps,.jpg,.jpeg,.png,.svg">
+                            <label for="designFile1" class="file-upload-label">
                                 📎 Click to upload design file (PDF, AI, EPS, JPG, PNG, SVG)
                             </label>
                         </div>
-                        <div class="file-name" id="fileName"></div>
+                        <div class="file-name" id="fileName1"></div>
                     </div>
                 </div>
                 
@@ -391,17 +410,181 @@
                     <h2>Additional Information</h2>
                     <div class="form-group">
                         <label>Other / Special Requests</label>
-                        <textarea name="other_info" placeholder="Enter any additional information or special requests here..."></textarea>
+                        <textarea name="item1_other_info" placeholder="Enter any additional information or special requests here..."></textarea>
                     </div>
                 </div>
                 
+                <!-- ADD ANOTHER ITEM CHECKBOX -->
                 <div class="form-section" style="background: #fffbea; padding: 20px; border-radius: 8px; border: 2px solid #FFD700;">
                     <div class="form-group" style="margin-bottom: 0;">
                         <label style="display: flex; align-items: center; cursor: pointer;">
                             <input type="checkbox" id="addAnotherItem" style="width: auto; margin-right: 10px; cursor: pointer;">
                             <span style="font-size: 16px;">Add another item for this same customer</span>
                         </label>
-                        <div class="quantity-hint" style="margin-left: 30px;">Check this box to request a quote for an additional product for the same customer. Sales Rep and Customer info will be copied over.</div>
+                        <div class="quantity-hint" style="margin-left: 30px;">Check this to add a second product to this quote request. Both items will be included in one email.</div>
+                    </div>
+                </div>
+                
+                <!-- ITEM 2 (HIDDEN BY DEFAULT) -->
+                <div id="item2Container">
+                    <div class="item-header">ITEM 2</div>
+                    
+                    <div class="form-section">
+                        <h2>Product Information</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Product Type <span class="required">*</span></label>
+                                <select name="item2_product_type" id="item2_product_type">
+                                    <option value="">Select Product Type</option>
+                                    <option value="Metal Tags">Metal Tags</option>
+                                    <option value="Magnets">Magnets</option>
+                                    <option value="Custom Labels">Custom Labels</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item2_product_type_other" id="item2_product_type_other" placeholder="Please specify product type" style="display:none; margin-top:10px;">
+                            </div>
+                            <div class="form-group"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h2>Quantity & Size</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Quantity <span class="required">*</span></label>
+                                <input type="text" name="item2_quantity" placeholder="e.g., 500 or 500 / 1000 / 2000">
+                                <div class="quantity-hint">Enter single quantity or multiple tiers separated by slashes</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Size <span class="required">*</span></label>
+                                <input type="text" name="item2_size" placeholder="e.g., 3 x 5 (inches assumed)">
+                                <div class="quantity-hint">Enter dimensions - inches assumed unless otherwise specified</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h2>Product Specifications</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Material <span class="required">*</span></label>
+                                <select name="item2_material" id="item2_material">
+                                    <option value="">Select Material</option>
+                                    <option value="Aluminum">Aluminum</option>
+                                    <option value="Stainless Steel">Stainless Steel</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item2_material_other" id="item2_material_other" placeholder="Please specify material" style="display:none; margin-top:10px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Thickness <span class="required">*</span></label>
+                                <select name="item2_thickness" id="item2_thickness">
+                                    <option value="">Select Thickness</option>
+                                    <option value="0.5mm">0.5 mm</option>
+                                    <option value="1mm">1 mm</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item2_thickness_other" id="item2_thickness_other" placeholder="Please specify thickness" style="display:none; margin-top:10px;">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Print <span class="required">*</span></label>
+                                <select name="item2_print" id="item2_print">
+                                    <option value="">Select Print Option</option>
+                                    <option value="One Side">One Side</option>
+                                    <option value="Two Side">Two Side</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item2_print_other" id="item2_print_other" placeholder="Please specify print option" style="display:none; margin-top:10px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Print Method <span class="required">*</span></label>
+                                <select name="item2_print_method" id="item2_print_method">
+                                    <option value="">Select Print Method</option>
+                                    <option value="Digital">Digital</option>
+                                    <option value="Etch and Fill">Etch and Fill</option>
+                                    <option value="Etch, No Fill">Etch, No Fill</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item2_print_method_other" id="item2_print_method_other" placeholder="Please specify print method" style="display:none; margin-top:10px;">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Print Color <span class="required">*</span></label>
+                                <select name="item2_print_color" id="item2_print_color">
+                                    <option value="">Select Print Color</option>
+                                    <option value="Black">Black</option>
+                                    <option value="Multiple Colors">Multiple Colors</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item2_print_color_other" id="item2_print_color_other" placeholder="Please specify print color" style="display:none; margin-top:10px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Hole <span class="required">*</span></label>
+                                <select name="item2_hole" id="item2_hole">
+                                    <option value="">Select Hole Option</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Multiple">Multiple</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item2_hole_other" id="item2_hole_other" placeholder="Please specify hole option" style="display:none; margin-top:10px;">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Adhesive <span class="required">*</span></label>
+                                <select name="item2_adhesive" id="item2_adhesive">
+                                    <option value="">Select Adhesive Option</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item2_adhesive_other" id="item2_adhesive_other" placeholder="Please specify adhesive option" style="display:none; margin-top:10px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Variable Data <span class="required">*</span></label>
+                                <select name="item2_variable_data" id="item2_variable_data">
+                                    <option value="">Select Variable Data Option</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" name="item2_variable_data_other" id="item2_variable_data_other" placeholder="Please specify variable data option" style="display:none; margin-top:10px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h2>Design</h2>
+                        <div class="form-group">
+                            <label>Upload Design File</label>
+                            <div class="file-upload">
+                                <input type="file" id="designFile2" name="item2_design_file" accept=".pdf,.ai,.eps,.jpg,.jpeg,.png,.svg">
+                                <label for="designFile2" class="file-upload-label">
+                                    📎 Click to upload design file (PDF, AI, EPS, JPG, PNG, SVG)
+                                </label>
+                            </div>
+                            <div class="file-name" id="fileName2"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h2>Additional Information</h2>
+                        <div class="form-group">
+                            <label>Other / Special Requests</label>
+                            <textarea name="item2_other_info" placeholder="Enter any additional information or special requests here..."></textarea>
+                        </div>
                     </div>
                 </div>
                 
@@ -409,192 +592,14 @@
                     <button type="submit">Submit Quote Request</button>
                 </div>
             </form>
-            
-            <div id="additionalItemsContainer" style="display: none; margin-top: 30px;">
-                <div class="form-content" style="padding-top: 0;">
-                    <h2 style="color: #FFD700; text-align: center; margin-bottom: 20px;">Additional Item for Same Customer</h2>
-                    <p style="text-align: center; color: #666; margin-bottom: 30px;">Sales Rep: <strong id="copiedSalesRep"></strong> | Customer: <strong id="copiedCustomer"></strong></p>
-                    
-                    <form id="additionalItemForm" action="https://formsubmit.co/d0e976ab656743bb7a46ac7208fec145" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="_subject" value="New Quote Request - Additional Item">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="text" name="_honey" style="display:none">
-                        <input type="hidden" name="_template" value="box">
-                        <input type="hidden" name="QUOTE_SUMMARY" id="formatted_quote_2">
-                        <input type="hidden" name="sales_rep" id="hiddenSalesRep">
-                        <input type="hidden" name="customer_company" id="hiddenCustomerCompany">
-                        
-                        <div class="form-section">
-                            <h2>Product Information</h2>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Product Type <span class="required">*</span></label>
-                                    <select name="product_type" id="product_type_2" required>
-                                        <option value="">Select Product Type</option>
-                                        <option value="Metal Tags">Metal Tags</option>
-                                        <option value="Magnets">Magnets</option>
-                                        <option value="Custom Labels">Custom Labels</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <input type="text" name="product_type_other" id="product_type_other_2" placeholder="Please specify product type" style="display:none; margin-top:10px;">
-                                </div>
-                                <div class="form-group"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-section">
-                            <h2>Quantity & Size</h2>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Quantity <span class="required">*</span></label>
-                                    <input type="text" name="quantity" required placeholder="e.g., 500 or 500 / 1000 / 2000">
-                                    <div class="quantity-hint">Enter single quantity or multiple tiers separated by slashes</div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Size <span class="required">*</span></label>
-                                    <input type="text" name="size" required placeholder="e.g., 3 x 5 (inches assumed)">
-                                    <div class="quantity-hint">Enter dimensions - inches assumed unless otherwise specified</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-section">
-                            <h2>Product Specifications</h2>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Material <span class="required">*</span></label>
-                                    <select name="material" id="material_2" required>
-                                        <option value="">Select Material</option>
-                                        <option value="Aluminum">Aluminum</option>
-                                        <option value="Stainless Steel">Stainless Steel</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <input type="text" name="material_other" id="material_other_2" placeholder="Please specify material" style="display:none; margin-top:10px;">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Thickness <span class="required">*</span></label>
-                                    <select name="thickness" id="thickness_2" required>
-                                        <option value="">Select Thickness</option>
-                                        <option value="0.5mm">0.5 mm</option>
-                                        <option value="1mm">1 mm</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <input type="text" name="thickness_other" id="thickness_other_2" placeholder="Please specify thickness" style="display:none; margin-top:10px;">
-                                </div>
-                            </div>
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Print <span class="required">*</span></label>
-                                    <select name="print" id="print_2" required>
-                                        <option value="">Select Print Option</option>
-                                        <option value="One Side">One Side</option>
-                                        <option value="Two Side">Two Side</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <input type="text" name="print_other" id="print_other_2" placeholder="Please specify print option" style="display:none; margin-top:10px;">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Print Method <span class="required">*</span></label>
-                                    <select name="print_method" id="print_method_2" required>
-                                        <option value="">Select Print Method</option>
-                                        <option value="Digital">Digital</option>
-                                        <option value="Etch and Fill">Etch and Fill</option>
-                                        <option value="Etch, No Fill">Etch, No Fill</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <input type="text" name="print_method_other" id="print_method_other_2" placeholder="Please specify print method" style="display:none; margin-top:10px;">
-                                </div>
-                            </div>
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Print Color <span class="required">*</span></label>
-                                    <select name="print_color" id="print_color_2" required>
-                                        <option value="">Select Print Color</option>
-                                        <option value="Black">Black</option>
-                                        <option value="Multiple Colors">Multiple Colors</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <input type="text" name="print_color_other" id="print_color_other_2" placeholder="Please specify print color" style="display:none; margin-top:10px;">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Hole <span class="required">*</span></label>
-                                    <select name="hole" id="hole_2" required>
-                                        <option value="">Select Hole Option</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                        <option value="Multiple">Multiple</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <input type="text" name="hole_other" id="hole_other_2" placeholder="Please specify hole option" style="display:none; margin-top:10px;">
-                                </div>
-                            </div>
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Adhesive <span class="required">*</span></label>
-                                    <select name="adhesive" id="adhesive_2" required>
-                                        <option value="">Select Adhesive Option</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <input type="text" name="adhesive_other" id="adhesive_other_2" placeholder="Please specify adhesive option" style="display:none; margin-top:10px;">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Variable Data <span class="required">*</span></label>
-                                    <select name="variable_data" id="variable_data_2" required>
-                                        <option value="">Select Variable Data Option</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <input type="text" name="variable_data_other" id="variable_data_other_2" placeholder="Please specify variable data option" style="display:none; margin-top:10px;">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-section">
-                            <h2>Design</h2>
-                            <div class="form-group">
-                                <label>Upload Design File</label>
-                                <div class="file-upload">
-                                    <input type="file" id="designFile2" name="design_file" accept=".pdf,.ai,.eps,.jpg,.jpeg,.png,.svg">
-                                    <label for="designFile2" class="file-upload-label">
-                                        📎 Click to upload design file (PDF, AI, EPS, JPG, PNG, SVG)
-                                    </label>
-                                </div>
-                                <div class="file-name" id="fileName2"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-section">
-                            <h2>Additional Information</h2>
-                            <div class="form-group">
-                                <label>Other / Special Requests</label>
-                                <textarea name="other_info" placeholder="Enter any additional information or special requests here..."></textarea>
-                            </div>
-                        </div>
-                        
-                        <div class="submit-section">
-                            <button type="submit">Submit Additional Item</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
     
     <script>
-        document.getElementById('designFile').addEventListener('change', function(e) {
+        // File upload indicators
+        document.getElementById('designFile1').addEventListener('change', function(e) {
             const fileName = e.target.files[0]?.name || '';
-            const fileNameDisplay = document.getElementById('fileName');
+            const fileNameDisplay = document.getElementById('fileName1');
             if (fileName) {
                 fileNameDisplay.textContent = '✅ File uploaded: ' + fileName;
                 fileNameDisplay.classList.add('active');
@@ -616,12 +621,13 @@
             }
         });
         
-        const dropdownsWithOther = [
-            'product_type', 'material', 'thickness', 'print', 'print_method', 
-            'print_color', 'hole', 'adhesive', 'variable_data'
+        // Handle "Other" dropdowns for Item 1
+        const item1Fields = [
+            'item1_product_type', 'item1_material', 'item1_thickness', 'item1_print', 
+            'item1_print_method', 'item1_print_color', 'item1_hole', 'item1_adhesive', 'item1_variable_data'
         ];
         
-        dropdownsWithOther.forEach(fieldName => {
+        item1Fields.forEach(fieldName => {
             const dropdown = document.getElementById(fieldName);
             const otherInput = document.getElementById(fieldName + '_other');
             
@@ -639,12 +645,13 @@
             }
         });
         
-        const dropdownsWithOther2 = [
-            'product_type_2', 'material_2', 'thickness_2', 'print_2', 'print_method_2', 
-            'print_color_2', 'hole_2', 'adhesive_2', 'variable_data_2'
+        // Handle "Other" dropdowns for Item 2
+        const item2Fields = [
+            'item2_product_type', 'item2_material', 'item2_thickness', 'item2_print', 
+            'item2_print_method', 'item2_print_color', 'item2_hole', 'item2_adhesive', 'item2_variable_data'
         ];
         
-        dropdownsWithOther2.forEach(fieldName => {
+        item2Fields.forEach(fieldName => {
             const dropdown = document.getElementById(fieldName);
             const otherInput = document.getElementById(fieldName + '_other');
             
@@ -662,34 +669,47 @@
             }
         });
         
+        // Handle "Add Another Item" checkbox
         document.getElementById('addAnotherItem').addEventListener('change', function() {
-            const container = document.getElementById('additionalItemsContainer');
+            const container = document.getElementById('item2Container');
+            const item2Inputs = container.querySelectorAll('input[required], select[required], textarea[required]');
             
             if (this.checked) {
-                const salesRep = document.querySelector('[name="sales_rep"]').value;
-                const customerCompany = document.querySelector('[name="customer_company"]').value;
-                
-                if (!salesRep || !customerCompany) {
-                    alert('Please fill in Sales Rep and Customer Company Name before adding another item.');
-                    this.checked = false;
-                    return;
-                }
-                
-                document.getElementById('hiddenSalesRep').value = salesRep;
-                document.getElementById('hiddenCustomerCompany').value = customerCompany;
-                document.getElementById('copiedSalesRep').textContent = salesRep;
-                document.getElementById('copiedCustomer').textContent = customerCompany;
-                
                 container.style.display = 'block';
+                // Make Item 2 fields required
+                document.getElementById('item2_product_type').required = true;
+                document.getElementById('item2_quantity').required = true;
+                document.getElementById('item2_size').required = true;
+                document.getElementById('item2_material').required = true;
+                document.getElementById('item2_thickness').required = true;
+                document.getElementById('item2_print').required = true;
+                document.getElementById('item2_print_method').required = true;
+                document.getElementById('item2_print_color').required = true;
+                document.getElementById('item2_hole').required = true;
+                document.getElementById('item2_adhesive').required = true;
+                document.getElementById('item2_variable_data').required = true;
                 
                 setTimeout(() => {
                     container.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 100);
             } else {
                 container.style.display = 'none';
+                // Make Item 2 fields optional
+                document.getElementById('item2_product_type').required = false;
+                document.getElementById('item2_quantity').required = false;
+                document.getElementById('item2_size').required = false;
+                document.getElementById('item2_material').required = false;
+                document.getElementById('item2_thickness').required = false;
+                document.getElementById('item2_print').required = false;
+                document.getElementById('item2_print_method').required = false;
+                document.getElementById('item2_print_color').required = false;
+                document.getElementById('item2_hole').required = false;
+                document.getElementById('item2_adhesive').required = false;
+                document.getElementById('item2_variable_data').required = false;
             }
         });
         
+        // Format quote data before submission
         document.getElementById('quoteForm').addEventListener('submit', function(e) {
             const formData = new FormData(this);
             
@@ -703,59 +723,49 @@
             
             let formatted = '=== QUOTE REQUEST ===\n\n';
             formatted += 'Sales Rep: ' + formData.get('sales_rep') + '\n';
-            formatted += 'Customer: ' + formData.get('customer_company') + '\n';
-            formatted += 'Product Type: ' + getValue('product_type') + '\n';
-            formatted += 'Quantity: ' + formData.get('quantity') + '\n';
-            formatted += 'Size: ' + formData.get('size') + '\n';
-            formatted += 'Material: ' + getValue('material') + '\n';
-            formatted += 'Thickness: ' + getValue('thickness') + '\n';
-            formatted += 'Print: ' + getValue('print') + '\n';
-            formatted += 'Print Method: ' + getValue('print_method') + '\n';
-            formatted += 'Print Color: ' + getValue('print_color') + '\n';
-            formatted += 'Hole: ' + getValue('hole') + '\n';
-            formatted += 'Adhesive: ' + getValue('adhesive') + '\n';
-            formatted += 'Variable Data: ' + getValue('variable_data') + '\n';
+            formatted += 'Customer: ' + formData.get('customer_company') + '\n\n';
             
-            const otherInfo = formData.get('other_info');
-            if (otherInfo && otherInfo.trim()) {
-                formatted += 'Other: ' + otherInfo + '\n';
+            // Item 1
+            formatted += '--- ITEM 1 ---\n';
+            formatted += 'Product Type: ' + getValue('item1_product_type') + '\n';
+            formatted += 'Quantity: ' + formData.get('item1_quantity') + '\n';
+            formatted += 'Size: ' + formData.get('item1_size') + '\n';
+            formatted += 'Material: ' + getValue('item1_material') + '\n';
+            formatted += 'Thickness: ' + getValue('item1_thickness') + '\n';
+            formatted += 'Print: ' + getValue('item1_print') + '\n';
+            formatted += 'Print Method: ' + getValue('item1_print_method') + '\n';
+            formatted += 'Print Color: ' + getValue('item1_print_color') + '\n';
+            formatted += 'Hole: ' + getValue('item1_hole') + '\n';
+            formatted += 'Adhesive: ' + getValue('item1_adhesive') + '\n';
+            formatted += 'Variable Data: ' + getValue('item1_variable_data') + '\n';
+            
+            const item1Other = formData.get('item1_other_info');
+            if (item1Other && item1Other.trim()) {
+                formatted += 'Other: ' + item1Other + '\n';
+            }
+            
+            // Item 2 (if checkbox is checked)
+            if (document.getElementById('addAnotherItem').checked) {
+                formatted += '\n--- ITEM 2 ---\n';
+                formatted += 'Product Type: ' + getValue('item2_product_type') + '\n';
+                formatted += 'Quantity: ' + formData.get('item2_quantity') + '\n';
+                formatted += 'Size: ' + formData.get('item2_size') + '\n';
+                formatted += 'Material: ' + getValue('item2_material') + '\n';
+                formatted += 'Thickness: ' + getValue('item2_thickness') + '\n';
+                formatted += 'Print: ' + getValue('item2_print') + '\n';
+                formatted += 'Print Method: ' + getValue('item2_print_method') + '\n';
+                formatted += 'Print Color: ' + getValue('item2_print_color') + '\n';
+                formatted += 'Hole: ' + getValue('item2_hole') + '\n';
+                formatted += 'Adhesive: ' + getValue('item2_adhesive') + '\n';
+                formatted += 'Variable Data: ' + getValue('item2_variable_data') + '\n';
+                
+                const item2Other = formData.get('item2_other_info');
+                if (item2Other && item2Other.trim()) {
+                    formatted += 'Other: ' + item2Other + '\n';
+                }
             }
             
             document.getElementById('formatted_quote').value = formatted;
-        });
-        
-        document.getElementById('additionalItemForm').addEventListener('submit', function(e) {
-            const formData = new FormData(this);
-            
-            const getValue = (field) => {
-                const value = formData.get(field);
-                if (value === 'Other') {
-                    return formData.get(field + '_other') || 'Other';
-                }
-                return value || '';
-            };
-            
-            let formatted = '=== ADDITIONAL ITEM - QUOTE REQUEST ===\n\n';
-            formatted += 'Sales Rep: ' + formData.get('sales_rep') + '\n';
-            formatted += 'Customer: ' + formData.get('customer_company') + '\n';
-            formatted += 'Product Type: ' + getValue('product_type') + '\n';
-            formatted += 'Quantity: ' + formData.get('quantity') + '\n';
-            formatted += 'Size: ' + formData.get('size') + '\n';
-            formatted += 'Material: ' + getValue('material') + '\n';
-            formatted += 'Thickness: ' + getValue('thickness') + '\n';
-            formatted += 'Print: ' + getValue('print') + '\n';
-            formatted += 'Print Method: ' + getValue('print_method') + '\n';
-            formatted += 'Print Color: ' + getValue('print_color') + '\n';
-            formatted += 'Hole: ' + getValue('hole') + '\n';
-            formatted += 'Adhesive: ' + getValue('adhesive') + '\n';
-            formatted += 'Variable Data: ' + getValue('variable_data') + '\n';
-            
-            const otherInfo = formData.get('other_info');
-            if (otherInfo && otherInfo.trim()) {
-                formatted += 'Other: ' + otherInfo + '\n';
-            }
-            
-            document.getElementById('formatted_quote_2').value = formatted;
         });
     </script>
     
