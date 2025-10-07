@@ -192,7 +192,6 @@
             padding: 8px 12px;
             border-radius: 4px;
             display: none;
-            word-wrap: break-word;
         }
         
         .file-name.active {
@@ -657,16 +656,38 @@
                     </div>
                     
                     <div class="form-section">
-                        <h2>Design</h2>
+                        <h2>Design Files</h2>
                         <div class="form-group">
-                            <label>Upload Design File(s)</label>
+                            <label>Upload Design File 1</label>
                             <div class="file-upload">
-                                <input type="file" id="designFile${itemNum}" name="design_file_${itemNum}[]" accept=".pdf,.ai,.eps,.jpg,.jpeg,.png,.svg" multiple>
-                                <label for="designFile${itemNum}" class="file-upload-label">
-                                    📎 Click to upload design files (PDF, AI, EPS, JPG, PNG, SVG) - Multiple files allowed
+                                <input type="file" id="designFile${itemNum}_1" name="design_file_${itemNum}_1" accept=".pdf,.ai,.eps,.jpg,.jpeg,.png,.svg">
+                                <label for="designFile${itemNum}_1" class="file-upload-label">
+                                    📎 Click to upload design file (PDF, AI, EPS, JPG, PNG, SVG)
                                 </label>
                             </div>
-                            <div class="file-name" id="fileName${itemNum}"></div>
+                            <div class="file-name" id="fileName${itemNum}_1"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Upload Design File 2 <span class="quantity-hint">(optional)</span></label>
+                            <div class="file-upload">
+                                <input type="file" id="designFile${itemNum}_2" name="design_file_${itemNum}_2" accept=".pdf,.ai,.eps,.jpg,.jpeg,.png,.svg">
+                                <label for="designFile${itemNum}_2" class="file-upload-label">
+                                    📎 Click to upload design file (PDF, AI, EPS, JPG, PNG, SVG)
+                                </label>
+                            </div>
+                            <div class="file-name" id="fileName${itemNum}_2"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Upload Design File 3 <span class="quantity-hint">(optional)</span></label>
+                            <div class="file-upload">
+                                <input type="file" id="designFile${itemNum}_3" name="design_file_${itemNum}_3" accept=".pdf,.ai,.eps,.jpg,.jpeg,.png,.svg">
+                                <label for="designFile${itemNum}_3" class="file-upload-label">
+                                    📎 Click to upload design file (PDF, AI, EPS, JPG, PNG, SVG)
+                                </label>
+                            </div>
+                            <div class="file-name" id="fileName${itemNum}_3"></div>
                         </div>
                     </div>
                     
@@ -716,21 +737,22 @@
         
         // Setup event listeners for all items
         function setupItemListeners(itemNum) {
-            // File upload
-            const fileInput = document.getElementById(`designFile${itemNum}`);
-            if (fileInput) {
-                fileInput.addEventListener('change', function(e) {
-                    const files = e.target.files;
-                    const fileNameDisplay = document.getElementById(`fileName${itemNum}`);
-                    if (files.length > 0) {
-                        const fileNames = Array.from(files).map(f => f.name).join(', ');
-                        fileNameDisplay.textContent = `✅ ${files.length} file(s) uploaded: ${fileNames}`;
-                        fileNameDisplay.classList.add('active');
-                    } else {
-                        fileNameDisplay.textContent = '';
-                        fileNameDisplay.classList.remove('active');
-                    }
-                });
+            // File uploads (3 per item)
+            for (let fileNum = 1; fileNum <= 3; fileNum++) {
+                const fileInput = document.getElementById(`designFile${itemNum}_${fileNum}`);
+                if (fileInput) {
+                    fileInput.addEventListener('change', function(e) {
+                        const fileName = e.target.files[0]?.name || '';
+                        const fileNameDisplay = document.getElementById(`fileName${itemNum}_${fileNum}`);
+                        if (fileName) {
+                            fileNameDisplay.textContent = '✅ File uploaded: ' + fileName;
+                            fileNameDisplay.classList.add('active');
+                        } else {
+                            fileNameDisplay.textContent = '';
+                            fileNameDisplay.classList.remove('active');
+                        }
+                    });
+                }
             }
             
             // Product type change
@@ -905,11 +927,13 @@
                                         cb.checked = false;
                                     });
                                     
-                                    // Hide file upload confirmation
-                                    const fileNameDisplay = document.getElementById(`fileName${j}`);
-                                    if (fileNameDisplay) {
-                                        fileNameDisplay.textContent = '';
-                                        fileNameDisplay.classList.remove('active');
+                                    // Hide file upload confirmations
+                                    for (let fileNum = 1; fileNum <= 3; fileNum++) {
+                                        const fileNameDisplay = document.getElementById(`fileName${j}_${fileNum}`);
+                                        if (fileNameDisplay) {
+                                            fileNameDisplay.textContent = '';
+                                            fileNameDisplay.classList.remove('active');
+                                        }
                                     }
                                     
                                     // Hide all product specs
