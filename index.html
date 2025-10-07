@@ -466,6 +466,8 @@
                                         <option value="Multiple">Multiple</option>
                                         <option value="Other">Other</option>
                                     </select>
+                                    <input type="text" name="item${itemNum}_hole_size" id="item${itemNum}_hole_size" placeholder="Enter hole size" style="display:none; margin-top:10px;">
+                                    <input type="text" name="item${itemNum}_hole_size_number" id="item${itemNum}_hole_size_number" placeholder="Enter hole size and number" style="display:none; margin-top:10px;">
                                     <input type="text" name="item${itemNum}_hole_other" id="item${itemNum}_hole_other" placeholder="Please specify hole option" style="display:none; margin-top:10px;">
                                 </div>
                             </div>
@@ -781,9 +783,9 @@
             
             // "Other" dropdowns
             const dropdowns = [
-                `item${itemNum}_print`, `item${itemNum}_print_color`, `item${itemNum}_hole`, 
-                `item${itemNum}_adhesive`, `item${itemNum}_variable_data_metal`,
-                `item${itemNum}_print_magnet`, `item${itemNum}_material_label`, `item${itemNum}_print_label`
+                `item${itemNum}_print`, `item${itemNum}_print_color`, `item${itemNum}_adhesive`, 
+                `item${itemNum}_variable_data_metal`, `item${itemNum}_print_magnet`, 
+                `item${itemNum}_material_label`, `item${itemNum}_print_label`
             ];
             
             dropdowns.forEach(fieldName => {
@@ -795,6 +797,30 @@
                     });
                 }
             });
+            
+            // Special handling for Hole field
+            const holeDropdown = document.getElementById(`item${itemNum}_hole`);
+            if (holeDropdown) {
+                const holeSizeInput = document.getElementById(`item${itemNum}_hole_size`);
+                const holeSizeNumberInput = document.getElementById(`item${itemNum}_hole_size_number`);
+                const holeOtherInput = document.getElementById(`item${itemNum}_hole_other`);
+                
+                holeDropdown.addEventListener('change', function() {
+                    // Hide all inputs first
+                    if (holeSizeInput) holeSizeInput.style.display = 'none';
+                    if (holeSizeNumberInput) holeSizeNumberInput.style.display = 'none';
+                    if (holeOtherInput) holeOtherInput.style.display = 'none';
+                    
+                    // Show appropriate input based on selection
+                    if (this.value === 'Yes' && holeSizeInput) {
+                        holeSizeInput.style.display = 'block';
+                    } else if (this.value === 'Multiple' && holeSizeNumberInput) {
+                        holeSizeNumberInput.style.display = 'block';
+                    } else if (this.value === 'Other' && holeOtherInput) {
+                        holeOtherInput.style.display = 'block';
+                    }
+                });
+            }
             
             // Handle "Previously Quoted" field
             const prevQuoted = document.getElementById(`item${itemNum}_previously_quoted`);
@@ -998,6 +1024,23 @@
                 return value || '';
             };
             
+            const getHoleValue = (itemNum) => {
+                const holeValue = formData.get(`item${itemNum}_hole`);
+                if (!holeValue) return '';
+                
+                if (holeValue === 'Yes') {
+                    const size = formData.get(`item${itemNum}_hole_size`);
+                    return size && size.trim() ? `Yes (${size.trim()})` : 'Yes';
+                } else if (holeValue === 'Multiple') {
+                    const sizeNumber = formData.get(`item${itemNum}_hole_size_number`);
+                    return sizeNumber && sizeNumber.trim() ? `Multiple (${sizeNumber.trim()})` : 'Multiple';
+                } else if (holeValue === 'Other') {
+                    const otherText = formData.get(`item${itemNum}_hole_other`);
+                    return otherText && otherText.trim() ? `Other: ${otherText.trim()}` : 'Other';
+                }
+                return holeValue;
+            };
+            
             let formatted = '=== QUOTE REQUEST ===\n\n';
             formatted += 'Sales Rep: ' + formData.get('sales_rep') + '\n';
             formatted += 'Customer: ' + formData.get('customer_company') + '\n\n';
@@ -1022,7 +1065,7 @@
                     formatted += 'Print: ' + getDropdownValue(`item${i}_print`) + '\n';
                     formatted += 'Print Method: ' + getCheckboxValues(`item${i}_print_method`) + '\n';
                     formatted += 'Print Color: ' + getDropdownValue(`item${i}_print_color`) + '\n';
-                    formatted += 'Hole: ' + getDropdownValue(`item${i}_hole`) + '\n';
+                    formatted += 'Hole: ' + getHoleValue(i) + '\n';
                     formatted += 'Adhesive: ' + getDropdownValue(`item${i}_adhesive`) + '\n';
                     formatted += 'Variable Data: ' + getDropdownValue(`item${i}_variable_data_metal`) + '\n';
                 } else if (itemType === 'Magnets') {
