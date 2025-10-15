@@ -337,7 +337,7 @@
                                 <label>Product Type <span class="required">*</span></label>
                                 <select name="item${itemNum}_product_type" id="item${itemNum}_product_type" ${isFirst ? 'required' : ''}>
                                     <option value="">Select Product Type</option>
-                                    <option value="Metal Tags">Metal Tags</option>
+                                    <option value="Metal: Tags, Adhesive Plates, etc">Metal: Tags, Adhesive Plates, etc</option>
                                     <option value="Magnets">Magnets</option>
                                     <option value="Custom Labels">Custom Labels</option>
                                     <option value="Other">Other</option>
@@ -771,7 +771,7 @@
                     otherSpecs.classList.remove('active');
                     otherTextarea.style.display = 'none';
                     
-                    if (this.value === 'Metal Tags') {
+                    if (this.value === 'Metal: Tags, Adhesive Plates, etc') {
                         metalSpecs.classList.add('active');
                     } else if (this.value === 'Magnets') {
                         magnetSpecs.classList.add('active');
@@ -988,7 +988,7 @@
                     const otherSpecs = document.getElementById(`item${i}_other_specs`);
                     
                     // Disable fields in non-selected product type sections
-                    if (selectedType !== 'Metal Tags' && metalSpecs) {
+                    if (selectedType !== 'Metal: Tags, Adhesive Plates, etc' && metalSpecs) {
                         const fields = metalSpecs.querySelectorAll('input, select, textarea');
                         fields.forEach(field => field.disabled = true);
                     }
@@ -1124,7 +1124,7 @@
                 formatted += 'Quantity: ' + (formData.get(`item${i}_quantity`) || '') + '\n';
                 formatted += 'Size: ' + (formData.get(`item${i}_size`) || '') + '\n';
                 
-                if (itemType === 'Metal Tags') {
+                if (itemType === 'Metal: Tags, Adhesive Plates, etc') {
                     formatted += 'Material: ' + getCheckboxValues(`item${i}_material`) + '\n';
                     formatted += 'Thickness: ' + getCheckboxValues(`item${i}_thickness`) + '\n';
                     formatted += 'Print: ' + getDropdownValue(`item${i}_print`) + '\n';
